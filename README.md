@@ -30,3 +30,8 @@ All answers live in the `I` object at the top of `public/assistant.js`:
   On static hosting without the server, point the `fetch('/api/lead')` calls
   (in `app.js` and `assistant.js`) to a form service such as Formspree.
 - Logo and privacy-policy link point to the current keymanchicago.com WordPress files.
+
+## Live site & updates
+Live: https://sayt-kz.github.io/keyman-chicago/ (GitHub Pages, branch `gh-pages` = contents of `public/`).
+
+After changing files: commit, then run `npm run deploy` — the site updates in about a minute.
