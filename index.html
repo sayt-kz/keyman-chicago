@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,14 +50,13 @@
       <div class="lang" id="langSwitch">
         <button class="lang__btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
-          <span class="lang__code">EN</span>
+          <span class="lang__code">RU</span>
           <i aria-hidden="true">▾</i>
         </button>
         <ul class="lang__menu" role="listbox">
-          <li><button type="button" role="option" data-lang="en"><b>EN</b> English</button></li>
           <li><button type="button" role="option" data-lang="ru"><b>RU</b> Русский</button></li>
+          <li><button type="button" role="option" data-lang="en"><b>EN</b> English</button></li>
           <li><button type="button" role="option" data-lang="uk"><b>UA</b> Українська</button></li>
-          <li><button type="button" role="option" data-lang="es"><b>ES</b> Español</button></li>
         </ul>
       </div>
       <a class="nav__phone" href="tel:+12242533252">
@@ -97,7 +96,7 @@
           <span data-i18n="hero.call">Call 224-253-3252</span>
         </a>
         <button class="btn btn--ghost btn--lg" data-open-assistant>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6zM19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 6.5a1.5 1.5 0 1 0 0 .01zm5 0a1.5 1.5 0 1 0 0 .01zm5 0a1.5 1.5 0 1 0 0 .01z"/></svg>
           <span data-i18n="hero.chat">Chat with us</span>
         </button>
       </div>
@@ -108,80 +107,19 @@
       </ul>
     </div>
 
-    <!-- Animated scene: smart key unlocks a car -->
-    <div class="scene reveal" aria-hidden="true">
-      <svg class="scene__svg" viewBox="0 0 560 520">
-        <defs>
-          <linearGradient id="gAmber" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#FFD25A"/><stop offset="1" stop-color="#FF9F0A"/>
-          </linearGradient>
-          <linearGradient id="gFob" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#1c2a52"/><stop offset="1" stop-color="#0b1430"/>
-          </linearGradient>
-          <linearGradient id="gBlade" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#9aa6c4"/><stop offset=".5" stop-color="#e9eefb"/><stop offset="1" stop-color="#8d99b8"/>
-          </linearGradient>
-          <filter id="fGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <!-- car outline (draws itself) -->
-        <g class="car" transform="translate(40 300)">
-          <path class="car__body" d="M10 120 C10 92 26 84 52 80 L120 70 C150 40 190 16 250 14 L330 14 C380 16 410 40 440 70 L470 76 C494 80 510 92 510 116 L510 140 L462 140 M378 140 L150 140 M66 140 L10 140 Z"/>
-          <path class="car__glass" d="M140 70 C166 44 196 30 246 28 L300 28 L300 70 Z M318 28 L332 28 C368 30 392 46 414 70 L318 70 Z"/>
-          <circle class="car__wheel" cx="108" cy="140" r="34"/>
-          <circle class="car__wheel" cx="420" cy="140" r="34"/>
-          <circle class="car__hub" cx="108" cy="140" r="12"/>
-          <circle class="car__hub" cx="420" cy="140" r="12"/>
-          <ellipse class="car__light car__light--front" cx="496" cy="96" rx="12" ry="7"/>
-          <ellipse class="car__light car__light--back" cx="18" cy="100" rx="8" ry="6"/>
-          <g class="car__beam"><path d="M506 96 L560 74 L560 118 Z"/></g>
-        </g>
-
-        <!-- lock status chip -->
-        <g class="lockchip" transform="translate(330 214)">
-          <rect width="176" height="48" rx="24"/>
-          <g transform="translate(18 10)">
-            <path class="lockchip__shackle" d="M6 12 V8 a8 8 0 0 1 16 0 V12" fill="none"/>
-            <rect class="lockchip__bodyr" x="2" y="12" width="24" height="18" rx="4"/>
-          </g>
-          <text class="lockchip__t lockchip__t--locked" x="58" y="30">LOCKED</text>
-          <text class="lockchip__t lockchip__t--open" x="58" y="30">UNLOCKED</text>
-        </g>
-
-        <!-- signal waves -->
-        <g class="waves" transform="translate(196 196)">
-          <path d="M0 -28 A28 28 0 0 1 0 28"/>
-          <path d="M0 -50 A50 50 0 0 1 0 50"/>
-          <path d="M0 -72 A72 72 0 0 1 0 72"/>
-        </g>
-
-        <!-- smart key fob + blade -->
-        <g class="fob">
-          <g class="fob__blade">
-            <path d="M120 248 L120 470 L134 488 L148 470 L148 450 L140 444 L148 432 L148 414 L138 404 L148 392 L148 376 L140 368 L148 356 L148 248 Z" fill="url(#gBlade)"/>
-            <path d="M128 260 L128 440" stroke="#6f7c9c" stroke-width="2"/>
-          </g>
-          <rect x="70" y="40" width="128" height="220" rx="56" fill="url(#gFob)" stroke="#2f4580" stroke-width="2"/>
-          <rect x="86" y="58" width="96" height="184" rx="44" fill="none" stroke="#24366a" stroke-width="2"/>
-          <circle cx="134" cy="70" r="5" class="fob__led"/>
-          <g class="fob__btn fob__btn--unlock">
-            <circle cx="134" cy="112" r="24"/>
-            <path d="M126 116 v-6 a8 8 0 0 1 15 -3" fill="none" stroke="#0b1430" stroke-width="3" stroke-linecap="round"/>
-            <rect x="123" y="114" width="22" height="14" rx="3" fill="#0b1430"/>
-          </g>
-          <g class="fob__btn2">
-            <circle cx="134" cy="168" r="20"/>
-            <rect x="126" y="160" width="16" height="12" rx="2" fill="none" stroke="#7d8fc0" stroke-width="2.5"/>
-            <path d="M129 160 v-4 a5 5 0 0 1 10 0 v4" fill="none" stroke="#7d8fc0" stroke-width="2.5"/>
-          </g>
-          <circle cx="134" cy="216" r="14" fill="#16234a" stroke="#2f4580" stroke-width="2"/>
-          <text x="134" y="221" text-anchor="middle" class="fob__km">KM</text>
-        </g>
-      </svg>
+    <!-- The Key Man van "comes alive": drives in, headlights flash, light sweeps over the wrap -->
+    <div class="vanstage reveal">
+      <div class="vanstage__speed" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="van">
+        <img src="img/van.jpg" alt="Key Man mobile service van" width="1600" height="1050" fetchpriority="high">
+        <span class="van__light" aria-hidden="true"></span>
+        <span class="van__shine" aria-hidden="true"></span>
+        <a class="van__call" href="tel:+12242533252" aria-label="Call 224-253-3252"><span></span></a>
+      </div>
+      <div class="vanstage__shadow" aria-hidden="true"></div>
       <div class="scene__badge scene__badge--a"><b data-i18n="badge.a">Smart key</b><span data-i18n="badge.as">programmed on site</span></div>
       <div class="scene__badge scene__badge--b"><b data-i18n="badge.b">12-mo</b><span data-i18n="badge.bs">warranty</span></div>
+      <div class="scene__badge scene__badge--c"><i class="pill__dot"></i><b data-i18n="badge.c">On the way</b><span data-i18n="badge.cs">from 30 minutes</span></div>
     </div>
   </div>
 
@@ -218,6 +156,38 @@
     </div>
   </div>
   <div class="showcase__track" id="showcase">
+    <button class="shot" data-type="image" data-src="img/photos/smart-key.jpg">
+      <img src="img/photos/smart-key.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t6">Smart keys</span><span class="shot__cap" data-i18n="ph.1">Smart key programming</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/key-cutting.jpg">
+      <img src="img/photos/key-cutting.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t1">Key cutting</span><span class="shot__cap" data-i18n="ph.2">Precision key cutting</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/bmw-onsite.jpg">
+      <img src="img/photos/bmw-onsite.jpg" alt="" loading="lazy">
+      <span class="shot__tag">BMW</span><span class="shot__cap" data-i18n="ph.3">On-site job at the client’s car</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/programmer.jpg">
+      <img src="img/photos/programmer.jpg" alt="" loading="lazy">
+      <span class="shot__tag">OEM</span><span class="shot__cap" data-i18n="ph.4">Dealer-level programming tools</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/van-workshop.jpg">
+      <img src="img/photos/van-workshop.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Key Man</span><span class="shot__cap" data-i18n="ph.5">Workshop on wheels</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/module.jpg">
+      <img src="img/photos/module.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t4">Programming</span><span class="shot__cap" data-i18n="ph.6">Module and immobilizer work</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/handover.jpg">
+      <img src="img/photos/handover.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Key Man</span><span class="shot__cap" data-i18n="ph.7">New key in your hands</span>
+    </button>
+    <button class="shot" data-type="image" data-src="img/photos/key-blanks.jpg">
+      <img src="img/photos/key-blanks.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Key Man</span><span class="shot__cap" data-i18n="ph.8">Hundreds of keys in stock</span>
+    </button>
     <button class="shot" data-type="youtube" data-vertical data-src="IW3F_a00IFs">
       <img src="https://i.ytimg.com/vi/IW3F_a00IFs/oar2.jpg" alt="" loading="lazy">
       <span class="shot__tag" data-i18n="shot.t1">Key cutting</span><span class="shot__cap" data-i18n="shot.c1">Car key copy on the spot</span>
@@ -286,36 +256,42 @@
 
     <div class="cards">
       <article class="card reveal">
+        <div class="card__media"><img src="img/photos/key-cutting.jpg" alt="" loading="lazy"></div>
         <div class="card__icon"><svg viewBox="0 0 24 24"><circle cx="7.5" cy="12" r="4.5"/><path d="M12 12h10M18 12v3M21 12v2"/></svg></div>
         <h3 data-i18n="sv.1h">Car Key Duplication</h3>
         <p data-i18n="sv.1p">Precise cutting of standard and high-security keys. A spare made in minutes, not days.</p>
         <button class="btn btn--primary btn--sm card__link" data-service="Car Key Duplication" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
+        <div class="card__media"><img src="img/photos/smart-key.jpg" alt="" loading="lazy"></div>
         <div class="card__icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="5"/><circle cx="12" cy="8" r="1.6"/><circle cx="12" cy="13" r="1.6"/><path d="M3 9a8 8 0 0 0 0 6M21 9a8 8 0 0 1 0 6"/></svg></div>
         <h3 data-i18n="sv.2h">Smart Keys &amp; Remotes</h3>
         <p data-i18n="sv.2p">Proximity keys, push-to-start fobs and remotes — supplied, cut and programmed to your car.</p>
         <button class="btn btn--primary btn--sm card__link" data-service="Smart Keys & Remotes" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
+        <div class="card__media"><img src="img/photos/programmer.jpg" alt="" loading="lazy"></div>
         <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
         <h3 data-i18n="sv.3h">OEM Equipment</h3>
         <p data-i18n="sv.3p">Professional diagnostic and programming tools, the same class dealerships use.</p>
         <button class="btn btn--primary btn--sm card__link" data-service="OEM equipment" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card card--hot reveal" data-badge="Emergency" data-i18n-attr="data-badge:sv.badge">
+        <div class="card__media"><img src="img/photos/bmw-onsite.jpg" alt="" loading="lazy"></div>
         <div class="card__icon"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 7.5-2"/><circle cx="12" cy="15.5" r="1.6"/></svg></div>
         <h3 data-i18n="sv.4h">Emergency Lockouts</h3>
         <p data-i18n="sv.4p">Keys locked inside? We open your car without damage — home, office or roadside.</p>
         <button class="btn btn--primary btn--sm card__link" data-service="Emergency Lockout" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
+        <div class="card__media"><img src="img/photos/bmw-programming.jpg" alt="" loading="lazy"></div>
         <div class="card__icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5M8.5 11h5M11 8.5v5"/></svg></div>
         <h3 data-i18n="sv.5h">Lost Key Replacement</h3>
         <p data-i18n="sv.5p">No key at all? We make and program a new one from scratch, even when all keys are lost.</p>
         <button class="btn btn--primary btn--sm card__link" data-service="Lost Key Replacement" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
+        <div class="card__media"><img src="img/photos/key-blanks.jpg" alt="" loading="lazy"></div>
         <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M3 15l2-6c.5-1.4 1.6-2 3-2h8c1.4 0 2.5.6 3 2l2 6v4h-3M6 19H3v-4M17 19H7"/><circle cx="7.5" cy="19" r="2"/><circle cx="16.5" cy="19" r="2"/></svg></div>
         <h3 data-i18n="sv.6h">Most Car Brands</h3>
         <p data-i18n="sv.6p">Domestic, Asian and European — including BMW, Mercedes-Benz and Volvo.</p>
@@ -334,16 +310,19 @@
     </div>
     <ol class="steps">
       <li class="step reveal">
+        <div class="step__media"><img src="img/photos/van-tech.jpg" alt="" loading="lazy"></div>
         <span class="step__n">01</span>
         <h3 data-i18n="how.1h">Call or message</h3>
         <p data-i18n="how.1p">Tell us your car's make, model, year and where you are. Get a price upfront.</p>
       </li>
       <li class="step reveal">
+        <div class="step__media"><img src="img/photos/van-front.jpg" alt="" loading="lazy"></div>
         <span class="step__n">02</span>
         <h3 data-i18n="how.2h">We drive to you</h3>
         <p data-i18n="how.2p">A fully equipped mobile van arrives — typically from 30 minutes.</p>
       </li>
       <li class="step reveal">
+        <div class="step__media"><img src="img/photos/handover.jpg" alt="" loading="lazy"></div>
         <span class="step__n">03</span>
         <h3 data-i18n="how.3h">Key ready on site</h3>
         <p data-i18n="how.3p">We cut, program and test the key with you. Covered by a 12-month warranty.</p>
@@ -355,19 +334,23 @@
 <!-- ============ WHY ============ -->
 <section class="section section--grey" id="why">
   <div class="container why">
+    <figure class="why__photo reveal">
+      <img src="img/photos/technician.jpg" alt="Key Man technician" loading="lazy">
+      <figcaption><b>Key Man Chicago</b><span data-i18n="why.cap">Your mobile locksmith</span></figcaption>
+    </figure>
     <div class="why__copy reveal">
       <span class="eyebrow" data-i18n="why.eyebrow">Why Key Man</span>
       <h2><span data-i18n="why.h2a">Fast. Fair.</span> <span class="grad" data-i18n="why.h2b">Guaranteed.</span></h2>
       <p data-i18n="why.p">Lost your key? Locked out? Need a spare? We've got you covered. Trusted by drivers, dealerships and businesses across Chicago.</p>
-      <a href="tel:+12242533252" class="btn btn--primary" data-i18n="nav.call">Call now</a>
-    </div>
-    <div class="why__grid">
+      <div class="why__grid">
       <div class="feat reveal"><b>30<small data-i18n="unit.min">min</small></b><span data-i18n="why.1">Fast response — from 30 minutes</span></div>
       <div class="feat reveal"><b>$</b><span data-i18n="why.2">Best prices in Chicago — no dealership markup</span></div>
       <div class="feat reveal"><b>12<small data-i18n="unit.mo">mo</small></b><span data-i18n="why.3">Warranty on all keys</span></div>
       <div class="feat reveal"><b>
         <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
       </b><span data-i18n="why.4">Mobile service — home, office, roadside</span></div>
+      </div>
+      <a href="tel:+12242533252" class="btn btn--primary" data-i18n="nav.call">Call now</a>
     </div>
   </div>
 </section>
@@ -445,9 +428,9 @@
       <p data-i18n="ct.p">Leave your details and we'll call you back — or just call us now.</p>
       <a class="contact__phone" href="tel:+12242533252">224-253-3252</a>
       <ul class="contact__list">
-        <li data-i18n="ct.l1">📍 Mobile service across Chicago</li>
-        <li data-i18n="ct.l2">🚐 Home · Office · Roadside</li>
-        <li data-i18n="ct.l3">🔑 12-month warranty on all keys</li>
+        <li data-i18n="ct.l1">Mobile service across Chicago</li>
+        <li data-i18n="ct.l2">Home · Office · Roadside</li>
+        <li data-i18n="ct.l3">12-month warranty on all keys</li>
       </ul>
     </div>
     <form class="form reveal" id="leadForm" novalidate data-title="Get a free quote" data-i18n-attr="data-title:fm.title">
@@ -494,33 +477,46 @@
 
 <!-- Mobile call bar -->
 <div class="callbar">
-  <a href="tel:+12242533252" class="btn btn--primary">📞 <span data-i18n="nav.call">Call now</span></a>
-  <button class="btn btn--ghost" data-open-assistant>💬 <span data-i18n="cb.chat">Chat</span></button>
+  <a href="tel:+12242533252" class="btn btn--primary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span data-i18n="nav.call">Call now</span></a>
+  <button class="btn btn--ghost" data-open-assistant><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span data-i18n="cb.chat">Chat</span></button>
 </div>
 
-<!-- ============ CHAT BOT ============ -->
-<button class="ai-fab" id="aiFab" aria-label="Open chat assistant" data-open-assistant>
-  <span class="ai-fab__icon">KM</span><span class="ai-fab__label">Key Man Bot</span>
+<!-- ============ CHAT WIDGET (assistant + quick request) ============ -->
+<button class="ai-fab" id="aiFab" aria-label="Open Key Man assistant" data-open-assistant>
+  <span class="ai-fab__icon"><img src="img/logo.png" alt=""></span><span class="ai-fab__label">Key Man AI</span>
 </button>
 
-<section class="ai" id="ai" role="dialog" aria-label="Key Man chat assistant" aria-hidden="true">
+<section class="ai" id="ai" role="dialog" aria-label="Key Man assistant" aria-hidden="true">
   <header class="ai__head">
-    <div class="ai__avatar">KM</div>
-    <div><b>Key Man Assistant</b><span><i class="ai__online"></i> <span id="aiStatus">Online · replies instantly</span></span></div>
-    <button class="ai__close" id="aiClose" aria-label="Close assistant">×</button>
-    <div class="ai__langs" id="aiLangs" role="group" aria-label="Chat language">
-      <button type="button" data-lang="en" title="English">EN</button>
-      <button type="button" data-lang="ru" title="Русский">RU</button>
-      <button type="button" data-lang="uk" title="Українська">UA</button>
-      <button type="button" data-lang="es" title="Español">ES</button>
-    </div>
+    <div class="ai__avatar"><img src="img/logo.png" alt="Key Man"></div>
+    <div><b>Key Man AI</b><span><i class="ai__online"></i> <span id="aiStatus">online</span></span></div>
+    <button class="ai__close" id="aiClose" aria-label="Close">×</button>
   </header>
-  <div class="ai__body" id="aiBody"></div>
-  <div class="ai__chips" id="aiChips"></div>
-  <form class="ai__form" id="aiForm">
-    <input id="aiInput" autocomplete="off" placeholder="Ask anything about car keys…" maxlength="800">
-    <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4l3 8zm3-8h8"/></svg></button>
-  </form>
+  <div class="ai__tabs" role="tablist">
+    <button class="ai__tab is-active" role="tab" aria-selected="true" data-tab="chat" data-i18n="ai.tab1">AI assistant</button>
+    <button class="ai__tab" role="tab" aria-selected="false" data-tab="lead" data-i18n="ai.tab2">Quick request</button>
+  </div>
+
+  <div class="ai__pane is-active" data-pane="chat">
+    <p class="ai__disc" data-i18n="ai.disc">Assistant answers are general guidance. The technician will confirm the exact price by phone.</p>
+    <div class="ai__body" id="aiBody"></div>
+    <div class="ai__chips" id="aiChips"></div>
+    <form class="ai__form" id="aiForm">
+      <input id="aiInput" autocomplete="off" placeholder="Ask anything about car keys…" maxlength="800">
+      <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4l3 8zm3-8h8"/></svg></button>
+    </form>
+  </div>
+
+  <div class="ai__pane" data-pane="lead">
+    <form class="ai__lead" id="aiLead" novalidate>
+      <label><span data-i18n="ai.l.name">Your name</span><input name="name" autocomplete="name"></label>
+      <label><span data-i18n="ai.l.contact">How can we reach you? *</span><input name="phone" type="tel" required autocomplete="tel" placeholder="(312) 555-0123"></label>
+      <label><span data-i18n="ai.l.need">What do you need? *</span><textarea name="message" rows="4" required placeholder="2019 Toyota Camry — lost key, I’m in Logan Square" data-i18n-attr="placeholder:ai.l.needPh"></textarea></label>
+      <label class="ai__consent"><input type="checkbox" name="consent" required> <span data-i18n="ai.l.consent">I consent to the processing of my personal data. <a href="https://keymanchicago.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></span></label>
+      <button class="btn btn--primary btn--block" type="submit" data-i18n="ai.l.send">Send request</button>
+      <p class="ai__status" id="aiLeadStatus" hidden></p>
+    </form>
+  </div>
 </section>
 
 <script src="i18n.js"></script>

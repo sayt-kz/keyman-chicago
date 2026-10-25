@@ -3,7 +3,7 @@
    The chosen language is shared with the chat bot through localStorage ("km-lang")
    and the "km:lang" event on window. */
 (() => {
-  const LANGS = ['en', 'ru', 'uk', 'es'];
+  const LANGS = ['ru', 'en', 'uk']; // Russian is the main language
   const KEY = 'km-lang';
 
   const T = {
@@ -134,9 +134,9 @@
     'ct.h2a': { en: 'Ask a question or', ru: 'Задайте вопрос или', uk: 'Поставте питання або', es: 'Haga una pregunta o' },
     'ct.h2b': { en: 'order a key', ru: 'закажите ключ', uk: 'замовте ключ', es: 'pida una llave' },
     'ct.p': { en: "Leave your details and we'll call you back — or just call us now.", ru: 'Оставьте контакты — мы перезвоним. Или просто позвоните нам.', uk: 'Залиште контакти — ми передзвонимо. Або просто зателефонуйте нам.', es: 'Deje sus datos y le llamamos, o llámenos ahora mismo.' },
-    'ct.l1': { en: '📍 Mobile service across Chicago', ru: '📍 Выезд по всему Чикаго', uk: '📍 Виїзд по всьому Чикаго', es: '📍 Servicio móvil en todo Chicago' },
-    'ct.l2': { en: '🚐 Home · Office · Roadside', ru: '🚐 Дом · Офис · Дорога', uk: '🚐 Дім · Офіс · Дорога', es: '🚐 Casa · Oficina · Carretera' },
-    'ct.l3': { en: '🔑 12-month warranty on all keys', ru: '🔑 Гарантия 12 месяцев на все ключи', uk: '🔑 Гарантія 12 місяців на всі ключі', es: '🔑 12 meses de garantía en todas las llaves' },
+    'ct.l1': { en: 'Mobile service across Chicago', ru: 'Выезд по всему Чикаго', uk: 'Виїзд по всьому Чикаго', es: 'Servicio móvil en todo Chicago' },
+    'ct.l2': { en: 'Home · Office · Roadside', ru: 'Дом · Офис · Дорога', uk: 'Дім · Офіс · Дорога', es: 'Casa · Oficina · Carretera' },
+    'ct.l3': { en: '12-month warranty on all keys', ru: 'Гарантия 12 месяцев на все ключи', uk: 'Гарантія 12 місяців на всі ключі', es: '12 meses de garantía en todas las llaves' },
     'fm.title': { en: 'Get a free quote', ru: 'Бесплатный расчёт', uk: 'Безкоштовний розрахунок', es: 'Presupuesto gratis' },
     'fm.name': { en: 'Name *', ru: 'Имя *', uk: "Ім'я *", es: 'Nombre *' },
     'fm.namePh': { en: 'John', ru: 'Иван', uk: 'Іван', es: 'Juan' },
@@ -157,6 +157,28 @@
 
     'ft.copy': { en: '© 2026 Key Man Chicago. Copying of materials is prohibited.', ru: '© 2026 Key Man Chicago. Копирование материалов запрещено.', uk: '© 2026 Key Man Chicago. Копіювання матеріалів заборонено.', es: '© 2026 Key Man Chicago. Prohibida la copia de materiales.' },
     'ft.privacy': { en: 'Privacy policy', ru: 'Политика конфиденциальности', uk: 'Політика конфіденційності', es: 'Política de privacidad' },
+    'badge.c': { en: 'On the way', ru: 'Уже в пути', uk: 'Вже в дорозі' },
+    'badge.cs': { en: 'from 30 minutes', ru: 'от 30 минут', uk: 'від 30 хвилин' },
+    'ph.1': { en: 'Smart key programming', ru: 'Прошивка смарт-ключа', uk: 'Програмування смарт-ключа' },
+    'ph.2': { en: 'Precision key cutting', ru: 'Точная нарезка ключа', uk: 'Точне нарізання ключа' },
+    'ph.3': { en: 'On-site job at the client’s car', ru: 'Работа прямо у машины клиента', uk: 'Робота просто біля машини клієнта' },
+    'ph.4': { en: 'Dealer-level programming tools', ru: 'Оборудование дилерского уровня', uk: 'Обладнання дилерського рівня' },
+    'ph.5': { en: 'Workshop on wheels', ru: 'Мастерская на колёсах', uk: 'Майстерня на колесах' },
+    'ph.6': { en: 'Module and immobilizer work', ru: 'Работа с блоками и иммобилайзером', uk: 'Робота з блоками та іммобілайзером' },
+    'ph.7': { en: 'New key in your hands', ru: 'Новый ключ у вас в руках', uk: 'Новий ключ у ваших руках' },
+    'ph.8': { en: 'Hundreds of keys in stock', ru: 'Сотни ключей в наличии', uk: 'Сотні ключів у наявності' },
+    'why.cap': { en: 'Your mobile locksmith', ru: 'Ваш выездной мастер', uk: 'Ваш виїзний майстер' },
+    'ai.tab1': { en: 'AI assistant', ru: 'ИИ-ассистент', uk: 'ШІ-асистент' },
+    'ai.tab2': { en: 'Quick request', ru: 'Быстрая заявка', uk: 'Швидка заявка' },
+    'ai.disc': { en: 'Assistant answers are general guidance. The technician will confirm the exact price by phone.', ru: 'Ответы ассистента носят справочный характер. Точную цену мастер назовёт по телефону.', uk: 'Відповіді асистента мають довідковий характер. Точну ціну майстер назве телефоном.' },
+    'ai.l.name': { en: 'Your name', ru: 'Ваше имя', uk: 'Ваше імʼя' },
+    'ai.l.contact': { en: 'How can we reach you? *', ru: 'Как с вами связаться? *', uk: 'Як з вами звʼязатися? *' },
+    'ai.l.need': { en: 'What do you need? *', ru: 'Что нужно сделать? *', uk: 'Що потрібно зробити? *' },
+    'ai.l.needPh': { en: '2019 Toyota Camry — lost key, I’m in Logan Square', ru: 'Toyota Camry 2019 — потерял ключ, я в Logan Square', uk: 'Toyota Camry 2019 — загубив ключ, я в Logan Square' },
+    'ai.l.consent': { en: 'I consent to the processing of my personal data. <a href="https://keymanchicago.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>', ru: 'Я согласен на обработку персональных данных. <a href="https://keymanchicago.com/privacy" target="_blank" rel="noopener">Политика конфиденциальности</a>', uk: 'Я погоджуюся на обробку персональних даних. <a href="https://keymanchicago.com/privacy" target="_blank" rel="noopener">Політика конфіденційності</a>' },
+    'ai.l.send': { en: 'Send request', ru: 'Отправить заявку', uk: 'Надіслати заявку' },
+    'ai.l.ok': { en: 'Thank you! We will call you back shortly.', ru: 'Спасибо! Скоро перезвоним.', uk: 'Дякуємо! Незабаром передзвонимо.' },
+    'ai.l.err': { en: 'Please enter a phone number, describe what you need and tick the consent box.', ru: 'Укажите телефон, опишите задачу и отметьте согласие.', uk: 'Вкажіть телефон, опишіть завдання й позначте згоду.' },
     'cb.chat': { en: 'Chat', ru: 'Чат', uk: 'Чат', es: 'Chat' },
   };
 
@@ -166,18 +188,13 @@
     uk: 'Key Man Chicago — автоключі та відкриття авто з виїздом',
     es: 'Key Man Chicago — llaves de carro y aperturas a domicilio',
   };
-  const LABELS = { en: 'EN', ru: 'RU', uk: 'UA', es: 'ES' };
+  const LABELS = { en: 'EN', ru: 'RU', uk: 'UA' };
 
   const storage = {
     get: () => { try { return localStorage.getItem(KEY); } catch { return null; } },
     set: v => { try { localStorage.setItem(KEY, v); } catch { /* private mode */ } },
   };
-  const browserLang = () => {
-    const l = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return LANGS.includes(l) ? l : 'en';
-  };
-
-  let current = LANGS.includes(storage.get()) ? storage.get() : browserLang();
+  let current = LANGS.includes(storage.get()) ? storage.get() : 'ru';
 
   const apply = lang => {
     document.documentElement.lang = lang === 'uk' ? 'uk' : lang;

@@ -4,7 +4,7 @@
 (() => {
   const PHONE = '224-253-3252';
   const TEL = 'tel:+12242533252';
-  const LANGS = ['en', 'ru', 'uk', 'es'];
+  const LANGS = ['ru', 'en', 'uk'];
 
   const panel = document.getElementById('ai');
   const body = document.getElementById('aiBody');
@@ -21,7 +21,7 @@
   };
   const browserLang = () => {
     const l = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return LANGS.includes(l) ? l : 'en';
+    return LANGS.includes(l) ? l : 'ru';
   };
   const saved = storage.get('km-lang'); // shared with the site language switcher (i18n.js)
   const ctx = {
@@ -34,7 +34,7 @@
   /* ================= Interface texts ================= */
   const UI = {
     placeholder: { en: 'Ask anything about car keys…', ru: 'Спросите что угодно про ключи…', uk: 'Запитайте будь-що про ключі…', es: 'Pregunte lo que quiera sobre llaves…' },
-    status: { en: 'Online · replies instantly', ru: 'Онлайн · отвечаем сразу', uk: 'Онлайн · відповідаємо одразу', es: 'En línea · respuesta inmediata' },
+    status: { en: 'online', ru: 'онлайн', uk: 'онлайн', es: 'en línea' },
     greet: {
       en: "Hi! I'm the Key Man assistant 👋\nLocked out, lost your key, or need a spare smart key? Ask me anything.",
       ru: 'Здравствуйте! Я ассистент Key Man 👋\nЗакрыли ключи в машине, потеряли ключ или нужен запасной смарт-ключ? Спрашивайте.',
@@ -57,7 +57,7 @@
     if (/[іїєґ]/i.test(t)) return 'uk';
     if (/[ыэъё]/i.test(t)) return 'ru';
     if (/[а-я]/i.test(t)) return ctx.lang === 'uk' ? 'uk' : 'ru';
-    if (/[ñ¿¡]/.test(t) || ES_WORDS.test(t)) return 'es';
+    if (/[ñ¿¡]/.test(t) || ES_WORDS.test(t)) return 'en'; // no Spanish on the site — answer in English
     if (EN_WORDS.test(t)) return 'en';
     return ctx.lang;
   };
@@ -718,6 +718,37 @@
       input.focus();
     }
   };
+
+  /* ================= Tabs: assistant / quick request ================= */
+  const tabs = panel.querySelectorAll('.ai__tab');
+  const showTab = name => {
+    tabs.forEach(t => { const on = t.dataset.tab === name; t.classList.toggle('is-active', on); t.setAttribute('aria-selected', on); });
+    panel.querySelectorAll('.ai__pane').forEach(p => p.classList.toggle('is-active', p.dataset.pane === name));
+    if (name === 'chat') setTimeout(() => input.focus(), 50);
+  };
+  tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+
+  const leadForm = document.getElementById('aiLead');
+  const leadStatus = document.getElementById('aiLeadStatus');
+  const tr = key => window.kmLang?.t(key) ?? key;
+  leadForm?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const phone = leadForm.phone.value.trim(), message = leadForm.message.value.trim();
+    const ok = phone.replace(/D/g, '').length >= 10 && message && leadForm.consent.checked;
+    leadForm.phone.classList.toggle('is-invalid', phone.replace(/D/g, '').length < 10);
+    leadForm.message.classList.toggle('is-invalid', !message);
+    leadStatus.hidden = false;
+    leadStatus.className = 'ai__status' + (ok ? ' is-ok' : ' is-err');
+    if (!ok) { leadStatus.textContent = tr('ai.l.err'); return; }
+    const btn = leadForm.querySelector('button[type=submit]');
+    btn.disabled = true;
+    try {
+      await fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: leadForm.name.value.trim(), phone, message, lang: ctx.lang, source: 'widget' }) });
+    } catch { /* static hosting: no backend yet */ }
+    leadStatus.textContent = tr('ai.l.ok');
+    leadForm.reset();
+    btn.disabled = false;
+  });
 
   /* ================= Open / close ================= */
   const greet = () => {
