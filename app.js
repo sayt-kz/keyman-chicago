@@ -250,8 +250,8 @@
     // phones fire resize when the address bar hides — keep the lines unless the width changed
     if (tracers.length && W === resize.lastW) return;
     resize.lastW = W;
-    const count = W < 720 ? 2 : 4;
-    tracers = [makeIntro(), ...Array.from({ length: count }, (_, i) => makeTracer(40 + i * 30))];
+    // a single animation: the big key in the middle (no other lines)
+    tracers = [makeIntro()];
     if (reduceMotion) { tracers.forEach(tr => { tr.prog = tr.total; tr.wait = 0; }); introResolve(); }
   };
 
@@ -273,8 +273,8 @@
         if (tr.intro) tr.prog = Math.min(tr.total, tr.total * (performance.now() - (tr.t0 ??= performance.now())) / 1300);
         else tr.prog = Math.min(tr.total, tr.prog + tr.speed);
         if (tr.intro && tr.prog >= tr.total) setTimeout(introResolve, 350); // key finished → let the video in
-      } else if (tr.hold < (tr.intro ? 150 : 60)) tr.hold++;
-      else if ((tr.alpha -= tr.intro ? .02 : .016) <= 0) { tracers[i] = makeTracer(rand(10, 50)); return; }
+      } else if (tr.hold < 240) tr.hold++;               // the finished key stays for ~4 s…
+      else if ((tr.alpha -= .02) <= 0) { tracers[i] = makeIntro(); return; } // …then fades and is drawn again
 
       // the line already drawn (the intro key is bolder and glows)
       ctx.save();
