@@ -99,10 +99,7 @@
   // the headline and the van come in right after the key is drawn
   introDone.then(() => hero.classList.remove('hero--intro'));
 
-  // phones: no YouTube background (its play/pause icon lingers on touch screens and it costs mobile data);
-  // the animated background stays. A local mp4 (data-mp4) still plays everywhere.
-  const phone = matchMedia('(max-width: 820px), (pointer: coarse)').matches;
-  if (heroVideo && !reduceMotion && !saveData && (heroVideo.dataset.mp4 || !phone)) {
+  if (heroVideo && !reduceMotion && !saveData) {
     const { yt, mp4 } = heroVideo.dataset;
     const start = +heroVideo.dataset.start || 0;
     const end = +heroVideo.dataset.end || 0;
