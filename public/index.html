@@ -75,7 +75,8 @@
      Background video: a segment of a Key Man YouTube video (data-yt / data-start / data-end).
      To use your own file instead, put hero.mp4 next to index.html and set data-mp4="hero.mp4".
      If the video can't play, the animated canvas below stays as the background. -->
-<section class="hero" id="hero">
+<section class="hero hero--intro" id="hero">
+  <noscript><style>.hero--intro .hero__grid { opacity: 1 !important; transform: none !important; }</style></noscript>
   <div class="hero__video" id="heroVideo" data-yt="G3-nBMgVPDA" data-start="88" data-end="160" data-mp4="" aria-hidden="true">
     <div id="heroPlayer"></div>
   </div>

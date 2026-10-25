@@ -34,6 +34,17 @@ code { background: #fff; border: 1px solid var(--line); border-radius: 6px; padd
 .login__card input { height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); font: inherit; }
 .login__card input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(31, 79, 191, .12); }
 .login__card .btn { height: 48px; }
+.login__top { display: flex; align-items: flex-start; justify-content: space-between; }
+
+/* interface language switcher */
+.alang { display: inline-flex; gap: 2px; padding: 3px; border-radius: 10px; background: var(--sky); }
+.alang button { min-width: 34px; height: 28px; padding: 0 8px; border-radius: 7px; font-family: var(--display); font-size: .68rem; font-weight: 700; color: var(--muted); }
+.alang button:hover { color: var(--blue); }
+.alang button.is-active { background: var(--amber); color: var(--on-amber); }
+.side .alang { background: rgba(255, 255, 255, .12); margin-bottom: 6px; }
+.side .alang button { color: #dbe5ff; }
+.side .alang button.is-active { color: var(--on-amber); }
+
 .login__err { margin: 0; color: var(--red); font-weight: 600; font-size: .9rem; }
 
 /* layout */

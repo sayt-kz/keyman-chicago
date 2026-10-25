@@ -89,7 +89,13 @@
   const hero = document.getElementById('hero');
   const heroVideo = document.getElementById('heroVideo');
   const saveData = navigator.connection?.saveData;
-  const showVideo = () => hero.classList.add('has-video');
+  // the video fades in only after the intro key has been drawn (or after 2.6 s at most)
+  let introResolve;
+  const introDone = new Promise(r => { introResolve = r; });
+  setTimeout(introResolve, reduceMotion ? 0 : 2600);
+  const showVideo = () => introDone.then(() => hero.classList.add('has-video'));
+  // the headline and the van come in right after the key is drawn
+  introDone.then(() => hero.classList.remove('hero--intro'));
 
   if (heroVideo && !reduceMotion && !saveData) {
     const { yt, mp4 } = heroVideo.dataset;
@@ -155,9 +161,15 @@
   };
 
   // a whole key silhouette: round bow with a hole, then the blade with bitting and a tip
-  const keyPath = () => {
-    const s = rand(.7, 1.15), cx = rand(W * .1, W * .75), cy = rand(H * .15, H * .85), rot = rand(-.5, .5);
+  // opts.center: the big intro key in the middle of the hero
+  const keyPath = (opts = {}) => {
+    const s = opts.scale ?? rand(.7, 1.15);
+    const rot = opts.rot ?? rand(-.5, .5);
     const R = 34 * s, bladeLen = 190 * s, bh = 26 * s, pts = [];
+    // centre the whole key (bow + blade) on the point, or drop it somewhere random
+    const halfW = (R + R * Math.cos(.35) + bladeLen + 14 * s) / 2;
+    const cx = opts.center ? W / 2 - halfW + R : rand(W * .1, W * .75);
+    const cy = opts.center ? H / 2 : rand(H * .15, H * .85);
     for (let a = .35; a <= Math.PI * 2 - .35; a += .12) pts.push([-Math.cos(a) * R, Math.sin(a) * R]);
     const x0 = R * Math.cos(.35);
     pts.push([x0, -bh / 2], [x0 + bladeLen, -bh / 2], [x0 + bladeLen + 14 * s, 0], [x0 + bladeLen, bh / 2]);
@@ -175,12 +187,26 @@
     return pts.map(([px, py]) => [cx + px * c - py * sn, cy + px * sn + py * c]);
   };
 
+  const measure = pts => {
+    const cum = [0];
+    for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    return cum;
+  };
+
   const makeTracer = (delay = 0) => {
     const isKey = Math.random() < .3;
     const pts = isKey ? keyPath() : profilePath();
-    const cum = [0];
-    for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
-    return { pts, cum, total: cum[cum.length - 1], prog: 0, speed: isKey ? rand(2.2, 3) : rand(2.8, 4.5), wait: delay, hold: 0, alpha: 1, isKey };
+    const cum = measure(pts);
+    return { pts, cum, total: cum[cum.length - 1], prog: 0, speed: isKey ? rand(4.5, 6) : rand(6, 9), wait: delay, hold: 0, alpha: 1, isKey };
+  };
+
+  // the big key in the middle, drawn in ~1.3 s while the video loads
+  const makeIntro = () => {
+    const keyW = Math.min(W * (W < 720 ? .86 : .62), 860);
+    const pts = keyPath({ center: true, scale: keyW / 290, rot: -.06 });
+    const cum = measure(pts);
+    const total = cum[cum.length - 1];
+    return { pts, cum, total, prog: 0, speed: total / 78, wait: 6, hold: 0, alpha: 1, isKey: true, intro: true };
   };
 
   const pointAt = (tr, d) => {
@@ -208,9 +234,9 @@
     // phones fire resize when the address bar hides — keep the lines unless the width changed
     if (tracers.length && W === resize.lastW) return;
     resize.lastW = W;
-    const count = W < 720 ? 3 : 6;
-    tracers = Array.from({ length: count }, (_, i) => makeTracer(i * 70));
-    if (reduceMotion) tracers.forEach(tr => { tr.prog = tr.total; tr.wait = 0; });
+    const count = W < 720 ? 2 : 4;
+    tracers = [makeIntro(), ...Array.from({ length: count }, (_, i) => makeTracer(40 + i * 30))];
+    if (reduceMotion) { tracers.forEach(tr => { tr.prog = tr.total; tr.wait = 0; }); introResolve(); }
   };
 
   const draw = () => {
@@ -226,37 +252,47 @@
     tracers.forEach((tr, i) => {
       if (tr.wait > 0) { tr.wait--; return; }
       const drawing = tr.prog < tr.total;
-      if (drawing) tr.prog = Math.min(tr.total, tr.prog + tr.speed);
-      else if (tr.hold < 90) tr.hold++;
-      else if ((tr.alpha -= .012) <= 0) { tracers[i] = makeTracer(rand(10, 80)); return; }
+      if (drawing) {
+        // the intro key is time-based (~1.3 s on any device); the others move per frame
+        if (tr.intro) tr.prog = Math.min(tr.total, tr.total * (performance.now() - (tr.t0 ??= performance.now())) / 1300);
+        else tr.prog = Math.min(tr.total, tr.prog + tr.speed);
+        if (tr.intro && tr.prog >= tr.total) setTimeout(introResolve, 350); // key finished → let the video in
+      } else if (tr.hold < (tr.intro ? 150 : 60)) tr.hold++;
+      else if ((tr.alpha -= tr.intro ? .02 : .016) <= 0) { tracers[i] = makeTracer(rand(10, 50)); return; }
 
-      // the line already drawn
-      ctx.lineWidth = tr.isKey ? 1.6 : 1.3;
-      ctx.strokeStyle = `rgba(255,170,50,${(tr.isKey ? .5 : .34) * tr.alpha})`;
+      // the line already drawn (the intro key is bolder and glows)
+      ctx.save();
+      if (tr.intro) { ctx.shadowColor = 'rgba(255,170,50,.55)'; ctx.shadowBlur = 14; }
+      ctx.lineWidth = tr.intro ? 3 : tr.isKey ? 1.6 : 1.3;
+      ctx.strokeStyle = `rgba(255,170,50,${(tr.intro ? .95 : tr.isKey ? .5 : .34) * tr.alpha})`;
       strokeRange(tr, 0, tr.prog);
+      ctx.restore();
 
       if (!drawing) return;
       // bright fresh segment right behind the dot
+      const tail = tr.intro ? 2.2 : 1;
       ctx.save();
-      ctx.shadowColor = 'rgba(245,165,28,.9)'; ctx.shadowBlur = 10;
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = 'rgba(255,205,100,.85)';
-      strokeRange(tr, tr.prog - 70, tr.prog);
+      ctx.shadowColor = 'rgba(245,165,28,.9)'; ctx.shadowBlur = tr.intro ? 18 : 10;
+      ctx.lineWidth = tr.intro ? 3.4 : 2;
+      ctx.strokeStyle = 'rgba(255,215,120,.95)';
+      strokeRange(tr, tr.prog - 70 * tail, tr.prog);
       ctx.strokeStyle = 'rgba(255,190,70,.35)';
-      strokeRange(tr, tr.prog - 200, tr.prog - 70);
+      strokeRange(tr, tr.prog - 200 * tail, tr.prog - 70 * tail);
       ctx.restore();
 
       // the dot itself
       const [hx, hy] = pointAt(tr, tr.prog);
-      const g = ctx.createRadialGradient(hx, hy, 0, hx, hy, 22);
+      const glow = tr.intro ? 34 : 22;
+      const g = ctx.createRadialGradient(hx, hy, 0, hx, hy, glow);
       g.addColorStop(0, 'rgba(255,215,110,.75)');
       g.addColorStop(1, 'rgba(245,165,28,0)');
       ctx.fillStyle = g;
-      ctx.beginPath(); ctx.arc(hx, hy, 22, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(hx, hy, glow, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = '#fff4d6';
-      ctx.beginPath(); ctx.arc(hx, hy, 2.6, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(hx, hy, tr.intro ? 4 : 2.6, 0, Math.PI * 2); ctx.fill();
 
-      if (Math.random() < .3) sparks.push({ x: hx, y: hy, vx: rand(-1.4, 1.4), vy: rand(-2, -.3), life: 1 });
+      const sparkChance = tr.intro ? .9 : .3;
+      if (Math.random() < sparkChance) sparks.push({ x: hx, y: hy, vx: rand(-1.8, 1.8), vy: rand(-2.4, -.3), life: 1 });
     });
 
     sparks = sparks.filter(s => (s.life -= .03) > 0);
