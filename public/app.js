@@ -182,7 +182,7 @@
 
       // the line already drawn
       ctx.lineWidth = tr.isKey ? 1.6 : 1.3;
-      ctx.strokeStyle = `rgba(245,165,28,${(tr.isKey ? .32 : .2) * tr.alpha})`;
+      ctx.strokeStyle = `rgba(255,170,50,${(tr.isKey ? .5 : .34) * tr.alpha})`;
       strokeRange(tr, 0, tr.prog);
 
       if (!drawing) return;
