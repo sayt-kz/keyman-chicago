@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru" data-admin>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Key Man — админ-панель</title>
+  <link rel="icon" href="../img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<main class="login" id="login" hidden>
+  <form class="login__card" id="loginForm">
+    <img src="../img/logo.png" alt="" width="56" height="56">
+    <h1>Key Man<br><span>админ-панель</span></h1>
+    <label>Пароль<input type="password" name="password" autocomplete="current-password" required autofocus></label>
+    <button class="btn btn--primary" type="submit">Войти</button>
+    <p class="login__err" id="loginErr" hidden></p>
+  </form>
+</main>
+
+<!-- ============ APP ============ -->
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <a class="side__logo" href="../" target="_blank" rel="noopener"><img src="../img/logo.png" alt=""><span>KEY<b>MAN</b></span></a>
+    <nav class="side__nav">
+      <button data-view="leads" class="is-active">Заявки <i class="badge" id="newCount" hidden>0</i></button>
+      <button data-view="texts">Тексты сайта</button>
+      <button data-view="gallery">Галерея</button>
+      <button data-view="settings">Настройки</button>
+    </nav>
+    <div class="side__foot">
+      <a href="../" target="_blank" rel="noopener">Открыть сайт ↗</a>
+      <button id="logout">Выйти</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- LEADS -->
+    <section class="view is-active" data-view="leads">
+      <header class="view__head">
+        <div><h2>Заявки</h2><p>Из формы на сайте, чата и «Быстрой заявки». Обновляются каждую минуту.</p></div>
+        <div class="view__actions">
+          <button class="btn" id="leadsRefresh">Обновить</button>
+          <button class="btn" id="leadsCsv">Скачать CSV</button>
+        </div>
+      </header>
+      <div class="filters" id="leadFilters">
+        <button data-f="all" class="is-active">Все</button>
+        <button data-f="new">Новые</button>
+        <button data-f="work">В работе</button>
+        <button data-f="done">Выполнено</button>
+        <button data-f="spam">Спам</button>
+      </div>
+      <div class="leads" id="leads"></div>
+    </section>
+
+    <!-- TEXTS -->
+    <section class="view" data-view="texts">
+      <header class="view__head">
+        <div><h2>Тексты сайта</h2><p>Русский, английский и украинский. Изменённые поля подсвечены; пустое поле = текст по умолчанию.</p></div>
+        <div class="view__actions">
+          <input class="search" id="textSearch" type="search" placeholder="Поиск по тексту…">
+          <button class="btn btn--primary" id="textsSave">Сохранить</button>
+        </div>
+      </header>
+      <div id="texts"></div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="view" data-view="gallery">
+      <header class="view__head">
+        <div><h2>Галерея «Реальные выезды»</h2><p>Фото и видео с YouTube. Порядок — как на сайте. Не забудьте нажать «Сохранить».</p></div>
+        <div class="view__actions">
+          <label class="btn">Добавить фото<input type="file" id="photoInput" accept="image/*" multiple hidden></label>
+          <button class="btn" id="ytAdd">Добавить видео YouTube</button>
+          <button class="btn btn--primary" id="gallerySave">Сохранить</button>
+        </div>
+      </header>
+      <div class="gallery" id="gallery"></div>
+      <p class="muted"><button class="link" id="galleryReset">Вернуть исходную галерею сайта</button></p>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" data-view="settings">
+      <header class="view__head"><div><h2>Настройки</h2><p>Что подключено на сервере (Vercel → Settings → Environment Variables / Storage).</p></div></header>
+      <div class="status" id="status"></div>
+      <div class="help">
+        <h3>Как подключить</h3>
+        <ol>
+          <li><b>Хранилище заявок и текстов</b> — Vercel → Storage → Upstash for Redis → Create → Connect к проекту.</li>
+          <li><b>Хранилище фото</b> — Vercel → Storage → Blob → Create → Connect к проекту.</li>
+          <li><b>Пароль админки</b> — переменная <code>ADMIN_PASSWORD</code>.</li>
+          <li><b>Уведомления в Telegram</b> — создайте бота у @BotFather, добавьте переменные <code>TELEGRAM_BOT_TOKEN</code> и <code>TELEGRAM_CHAT_ID</code>.</li>
+          <li>После изменения переменных — Deployments → Redeploy.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="../i18n.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

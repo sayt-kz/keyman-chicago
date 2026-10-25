@@ -1,37 +1,43 @@
-# Key Man Chicago — redesign
+# Key Man Chicago — website + admin panel
 
 ```
 keyman/
-  public/          the website — upload this folder to any hosting as-is
-    index.html
-    styles.css
-    app.js         nav, scroll reveals, hero canvas animation, lead form
-    assistant.js   chat bot (no AI / no API keys): answers in EN / RU / ES,
-                   remembers the car, takes callback requests in the chat
-  server.js        optional Node server: serves public/ + receives leads at POST /api/lead
-  package.json
+  public/            the website (static)
+    index.html, styles.css, app.js, gallery.js, i18n.js (RU/EN/UA texts), assistant.js (chat bot)
+    img/             van photo, logo, photos from the Key Man shoot (resized for web)
+    admin/           admin panel UI  →  /admin/
+  api/               serverless functions (Vercel)
+    lead.js          POST  /api/lead            requests from the form, chat bot and quick-request tab
+    content.js       GET   /api/content         texts + gallery edited in the admin panel
+    admin/login.js   GET/POST/DELETE            sign in / out (password = ADMIN_PASSWORD)
+    admin/leads.js   GET/PATCH/DELETE           list leads, change status / note, delete
+    admin/content.js GET/PUT                    site texts (RU/EN/UA) and gallery
+    admin/upload.js  POST                       photo upload (to Vercel Blob)
+    admin/status.js  GET                        which integrations are connected
+  lib/server.js      shared helpers (Redis, auth, uploads, Telegram)
+  server.js          local dev server that runs the same API (data in memory)
+  vercel.json
 ```
+
+## Deploy on Vercel (US hosting)
+1. vercel.com → Sign up / Log in **with GitHub** → *Add New… → Project* → import `sayt-kz/keyman-chicago`.
+   Framework preset: **Other**. Leave build settings as they are (`vercel.json` sets `public/` as output). Deploy.
+2. Project → **Storage** → *Upstash for Redis* (free) → Create → Connect to the project (adds `KV_REST_API_URL`, `KV_REST_API_TOKEN`).
+3. Project → **Storage** → *Blob* → Create → Connect (adds `BLOB_READ_WRITE_TOKEN`) — needed for photo uploads.
+4. Project → **Settings → Environment Variables**:
+   - `ADMIN_PASSWORD` — password for /admin/ (required)
+   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` — optional, new requests are sent to Telegram
+5. **Deployments → Redeploy**. Admin panel: `https://<project>.vercel.app/admin/`
+6. Own domain: Settings → Domains → add `keymanchicago.com` and follow the DNS instructions.
+
+Every `git push` to `main` redeploys automatically.
 
 ## Run locally
-
 ```bash
 node server.js
-# open http://localhost:3000
 ```
+Site: http://localhost:3000 · admin: http://localhost:3000/admin/ (password `admin` unless `ADMIN_PASSWORD` is set).
+Without Redis/Blob variables data lives in memory and photos go to `public/uploads/`.
 
-## Editing the bot
-All answers live in the `I` object at the top of `public/assistant.js`:
-- `kw` — words that trigger the answer (any language, lower case);
-- `r` — the reply in `en`, `ru`, `es`;
-- `chips` — quick-reply buttons shown after the answer.
-
-## Before going live
-- `/api/lead` only logs requests to the console. Connect it to email, a CRM or Telegram.
-  On static hosting without the server, point the `fetch('/api/lead')` calls
-  (in `app.js` and `assistant.js`) to a form service such as Formspree.
-- Logo and privacy-policy link point to the current keymanchicago.com WordPress files.
-
-## Live site & updates
-Live: https://sayt-kz.github.io/keyman-chicago/ (GitHub Pages, branch `gh-pages` = contents of `public/`).
-
-After changing files: commit, then run `npm run deploy` — the site updates in about a minute.
+## Editing the chat bot
+Answers live in the `I` object in `public/assistant.js` (`kw` — trigger words, `r` — replies per language, `chips` — quick buttons).

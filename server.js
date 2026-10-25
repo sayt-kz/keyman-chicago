@@ -1,41 +1,34 @@
-// Key Man Chicago — optional Node server: serves public/ and receives leads at POST /api/lead.
-// The site itself (including the chat bot) also works on any static hosting without this server.
-// Run: node server.js  → http://localhost:3000
+// Local dev server: serves public/ and runs the same /api functions Vercel runs.
+// Without Redis/Blob env vars data is kept in memory and photos go to public/uploads.
+// Admin password locally: ADMIN_PASSWORD env, or "admin" if not set.
+// Run: node server.js  → http://localhost:3000  (admin: http://localhost:3000/admin/)
 import http from "node:http";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
+const ROOT = path.dirname(fileURLToPath(import.meta.url));
+const PUBLIC = path.join(ROOT, "public");
 const PORT = process.env.PORT || 3000;
-const PUBLIC = path.join(path.dirname(fileURLToPath(import.meta.url)), "public");
-const MAX_BODY = 16_000;
+const TYPES = {
+  ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".json": "application/json",
+  ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon",
+};
 
-function readJson(req) {
-  return new Promise((resolve, reject) => {
-    let data = "";
-    req.on("data", chunk => {
-      data += chunk;
-      if (data.length > MAX_BODY) { reject(new Error("too large")); req.destroy(); }
-    });
-    req.on("end", () => { try { resolve(JSON.parse(data || "{}")); } catch (e) { reject(e); } });
-  });
+async function runApi(req, res, pathname) {
+  const file = path.join(ROOT, pathname + ".js");
+  if (!file.startsWith(path.join(ROOT, "api"))) { res.writeHead(404); return res.end(); }
+  try { await stat(file); } catch { res.writeHead(404); return res.end("No such API"); }
+  const mod = await import(pathToFileURL(file).href);
+  return mod.default(req, res);
 }
 
-async function handleLead(req, res) {
-  let lead;
-  try { lead = await readJson(req); } catch { res.writeHead(400); return res.end(); }
-  // TODO: forward to email / CRM / Telegram. For now leads are logged on the server.
-  console.log(new Date().toISOString(), "New lead:", JSON.stringify(lead));
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end('{"ok":true}');
-}
-
-const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon" };
-
-async function serveStatic(req, res) {
-  const urlPath = decodeURIComponent(new URL(req.url, "http://x").pathname);
-  const file = path.join(PUBLIC, urlPath === "/" ? "index.html" : urlPath);
+async function serveStatic(req, res, pathname) {
+  let file = path.join(PUBLIC, pathname);
   if (!file.startsWith(PUBLIC)) { res.writeHead(403); return res.end(); }
+  try {
+    if ((await stat(file)).isDirectory()) file = path.join(file, "index.html");
+  } catch { /* try below */ }
   try {
     const data = await readFile(file);
     res.writeHead(200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
@@ -46,7 +39,8 @@ async function serveStatic(req, res) {
 }
 
 http.createServer((req, res) => {
-  if (req.method === "POST" && req.url === "/api/lead") return handleLead(req, res);
-  if (req.method === "GET") return serveStatic(req, res);
-  res.writeHead(405); res.end();
-}).listen(PORT, () => console.log(`Key Man site running on http://localhost:${PORT}`));
+  const { pathname } = new URL(req.url, "http://x");
+  const p = decodeURIComponent(pathname);
+  if (p.startsWith("/api/")) return runApi(req, res, p.replace(/\/$/, ""));
+  return serveStatic(req, res, p);
+}).listen(PORT, () => console.log(`Key Man site: http://localhost:${PORT}  ·  admin: http://localhost:${PORT}/admin/`));

@@ -1,57 +1,94 @@
-/* Project showcase: slider + fullscreen viewer for photos, mp4 videos and YouTube. */
+/* Project showcase: slider + fullscreen viewer for photos, mp4 videos and YouTube (Shorts).
+   Cards can be replaced at runtime by the gallery from the admin panel ("km:gallery" event). */
 (() => {
-  const track = document.getElementById('showcase');
   const box = document.getElementById('lightbox');
-  if (!track || !box) return;
+  if (!document.getElementById('showcase') || !box) return;
 
-  const shots = [...track.querySelectorAll('.shot')];
+  const track = () => document.getElementById('showcase');
   const arrows = document.querySelectorAll('.showcase__arrow');
   const media = box.querySelector('.lightbox__media');
   const cap = box.querySelector('.lightbox__cap');
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let shots = [];
   let current = -1;
+  let drag = null;
 
-  /* ---------- placeholders for files that aren't uploaded yet ---------- */
-  shots.forEach(shot => {
-    const img = shot.querySelector('img');
-    const markEmpty = () => {
-      // a missing poster is fine for YouTube; for photos/videos it means nothing is uploaded yet
-      if (shot.dataset.type !== 'youtube') shot.classList.add('is-empty');
-    };
-    if (!img) return;
-    if (img.complete && img.naturalWidth === 0) markEmpty();
-    img.addEventListener('error', markEmpty);
-    img.addEventListener('load', () => shot.classList.remove('is-empty'));
-  });
   const available = () => shots.filter(s => !s.classList.contains('is-empty'));
 
   /* ---------- slider ---------- */
-  const step = () => shots[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 20);
+  const step = () => (shots[0]?.getBoundingClientRect().width || 300) + parseFloat(getComputedStyle(track()).columnGap || 20);
   const updateArrows = () => {
-    arrows[0].disabled = track.scrollLeft < 4;
-    arrows[1].disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    const t = track();
+    arrows[0].disabled = t.scrollLeft < 4;
+    arrows[1].disabled = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
   };
-  arrows.forEach(a => a.addEventListener('click', () => track.scrollBy({ left: step() * +a.dataset.dir })));
-  track.addEventListener('scroll', updateArrows, { passive: true });
+  arrows.forEach(a => a.addEventListener('click', () => track().scrollBy({ left: step() * +a.dataset.dir })));
+  track().addEventListener('scroll', updateArrows, { passive: true });
   addEventListener('resize', updateArrows);
-  updateArrows();
 
   // drag to scroll with the mouse
-  let drag = null;
-  track.addEventListener('pointerdown', e => {
+  track().addEventListener('pointerdown', e => {
     if (e.pointerType !== 'mouse') return;
-    drag = { x: e.clientX, left: track.scrollLeft, moved: false };
+    drag = { x: e.clientX, left: track().scrollLeft, moved: false };
   });
   addEventListener('pointermove', e => {
     if (!drag) return;
     const dx = e.clientX - drag.x;
-    if (Math.abs(dx) > 5) { drag.moved = true; track.style.scrollSnapType = 'none'; track.style.scrollBehavior = 'auto'; }
-    track.scrollLeft = drag.left - dx;
+    if (Math.abs(dx) > 5) { drag.moved = true; track().style.scrollSnapType = 'none'; track().style.scrollBehavior = 'auto'; }
+    track().scrollLeft = drag.left - dx;
   });
   addEventListener('pointerup', () => {
     if (!drag) return;
-    track.style.scrollSnapType = ''; track.style.scrollBehavior = '';
+    track().style.scrollSnapType = ''; track().style.scrollBehavior = '';
     setTimeout(() => { drag = null; }, 0);
   });
+
+  /* ---------- cards ---------- */
+  const initCards = () => {
+    shots = [...track().querySelectorAll('.shot')];
+
+    shots.forEach(shot => {
+      // placeholder for files that aren't uploaded yet
+      const img = shot.querySelector('img');
+      const markEmpty = () => { if (shot.dataset.type !== 'youtube') shot.classList.add('is-empty'); };
+      if (img) {
+        if (img.complete && img.naturalWidth === 0) markEmpty();
+        img.addEventListener('error', markEmpty);
+        img.addEventListener('load', () => shot.classList.remove('is-empty'));
+      }
+
+      // hover preview: the Short starts playing silently inside the card
+      if (canHover && shot.dataset.type === 'youtube') {
+        let timer;
+        shot.addEventListener('pointerenter', () => {
+          timer = setTimeout(() => {
+            const id = encodeURIComponent(shot.dataset.src);
+            const f = document.createElement('iframe');
+            f.className = 'shot__preview';
+            f.allow = 'autoplay; encrypted-media';
+            f.tabIndex = -1;
+            f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&playsinline=1&rel=0&iv_load_policy=3&disablekb=1`;
+            // YouTube shows its play/pause overlay for the first moment — fade in after it's gone
+            f.addEventListener('load', () => setTimeout(() => f.classList.add('is-on'), 1400));
+            shot.querySelector('img').after(f);
+            shot.classList.add('is-previewing');
+          }, 300);
+        });
+        shot.addEventListener('pointerleave', () => {
+          clearTimeout(timer);
+          shot.querySelector('.shot__preview')?.remove();
+          shot.classList.remove('is-previewing');
+        });
+      }
+
+      shot.addEventListener('click', () => {
+        if (drag?.moved || shot.classList.contains('is-empty')) return;
+        open(shot);
+      });
+    });
+    track().scrollLeft = 0;
+    updateArrows();
+  };
 
   /* ---------- lightbox ---------- */
   const render = shot => {
@@ -81,8 +118,7 @@
   };
 
   const open = shot => {
-    const list = available();
-    current = list.indexOf(shot);
+    current = available().indexOf(shot);
     if (current < 0) return;
     render(shot);
     box.hidden = false;
@@ -102,36 +138,6 @@
     render(list[current]);
   };
 
-  /* ---------- hover preview: the Short starts playing silently inside the card ---------- */
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    shots.filter(s => s.dataset.type === 'youtube').forEach(shot => {
-      let timer;
-      shot.addEventListener('pointerenter', () => {
-        timer = setTimeout(() => {
-          const id = encodeURIComponent(shot.dataset.src);
-          const f = document.createElement('iframe');
-          f.className = 'shot__preview';
-          f.allow = 'autoplay; encrypted-media';
-          f.tabIndex = -1;
-          f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&playsinline=1&rel=0&iv_load_policy=3&disablekb=1`;
-          // YouTube shows its play/pause overlay for the first moment — fade in after it's gone
-          f.addEventListener('load', () => setTimeout(() => f.classList.add('is-on'), 1400));
-          shot.querySelector('img').after(f);
-          shot.classList.add('is-previewing');
-        }, 300);
-      });
-      shot.addEventListener('pointerleave', () => {
-        clearTimeout(timer);
-        shot.querySelector('.shot__preview')?.remove();
-        shot.classList.remove('is-previewing');
-      });
-    });
-  }
-
-  shots.forEach(shot => shot.addEventListener('click', () => {
-    if (drag?.moved || shot.classList.contains('is-empty')) return;
-    open(shot);
-  }));
   box.querySelector('.lightbox__close').addEventListener('click', close);
   box.querySelector('.lightbox__arrow--prev').addEventListener('click', () => go(-1));
   box.querySelector('.lightbox__arrow--next').addEventListener('click', () => go(1));
@@ -152,4 +158,7 @@
     if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
     touchX = null;
   });
+
+  initCards();
+  addEventListener('km:gallery', initCards);
 })();
