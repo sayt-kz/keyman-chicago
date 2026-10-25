@@ -55,7 +55,9 @@
 
   /* ---------- lightbox ---------- */
   const render = shot => {
-    const { type, src, poster, caption } = shot.dataset;
+    const { type, src, poster } = shot.dataset;
+    // caption: explicit, or the (already translated) text on the card
+    const caption = shot.dataset.caption || shot.querySelector('.shot__cap')?.textContent || '';
     media.innerHTML = '';
     let el;
     if (type === 'video') {
@@ -64,7 +66,8 @@
       if (poster) el.poster = poster;
     } else if (type === 'youtube') {
       el = document.createElement('iframe');
-      el.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(src)}?autoplay=1&rel=0`;
+      el.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(src)}?autoplay=1&rel=0&playsinline=1`;
+      el.classList.toggle('is-vertical', 'vertical' in shot.dataset);
       el.allow = 'autoplay; encrypted-media; picture-in-picture';
       el.allowFullscreen = true;
       el.title = caption || 'Video';
@@ -98,6 +101,32 @@
     current = (current + dir + list.length) % list.length;
     render(list[current]);
   };
+
+  /* ---------- hover preview: the Short starts playing silently inside the card ---------- */
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    shots.filter(s => s.dataset.type === 'youtube').forEach(shot => {
+      let timer;
+      shot.addEventListener('pointerenter', () => {
+        timer = setTimeout(() => {
+          const id = encodeURIComponent(shot.dataset.src);
+          const f = document.createElement('iframe');
+          f.className = 'shot__preview';
+          f.allow = 'autoplay; encrypted-media';
+          f.tabIndex = -1;
+          f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&playsinline=1&rel=0&iv_load_policy=3&disablekb=1`;
+          // YouTube shows its play/pause overlay for the first moment — fade in after it's gone
+          f.addEventListener('load', () => setTimeout(() => f.classList.add('is-on'), 1400));
+          shot.querySelector('img').after(f);
+          shot.classList.add('is-previewing');
+        }, 300);
+      });
+      shot.addEventListener('pointerleave', () => {
+        clearTimeout(timer);
+        shot.querySelector('.shot__preview')?.remove();
+        shot.classList.remove('is-previewing');
+      });
+    });
+  }
 
   shots.forEach(shot => shot.addEventListener('click', () => {
     if (drag?.moved || shot.classList.contains('is-empty')) return;

@@ -41,7 +41,7 @@
   /* ---------- "Order" buttons prefill the form ---------- */
   const select = document.getElementById('serviceSelect');
   const pickService = name => {
-    const opt = [...select.options].find(o => o.text === name);
+    const opt = [...select.options].find(o => o.value === name);
     if (opt) select.value = opt.value;
   };
   document.querySelectorAll('[data-service]').forEach(btn => btn.addEventListener('click', () => {
@@ -80,6 +80,55 @@
       const x = (e.clientX / innerWidth - .5) * 2, y = (e.clientY / innerHeight - .5) * 2;
       scene.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 5}deg)`;
     });
+  }
+
+  /* ---------- Hero background video (like samalconstruction.com) ----------
+     Plays a muted, looping segment of a Key Man YouTube video behind the hero.
+     With data-mp4 set, a local file is used instead. If nothing can play
+     (blocked autoplay, data saver, reduced motion) the canvas animation stays. */
+  const hero = document.getElementById('hero');
+  const heroVideo = document.getElementById('heroVideo');
+  const saveData = navigator.connection?.saveData;
+  const showVideo = () => hero.classList.add('has-video');
+
+  if (heroVideo && !reduceMotion && !saveData) {
+    const { yt, mp4 } = heroVideo.dataset;
+    const start = +heroVideo.dataset.start || 0;
+    const end = +heroVideo.dataset.end || 0;
+
+    if (mp4) {
+      const v = document.createElement('video');
+      Object.assign(v, { src: mp4, muted: true, autoplay: true, loop: true, playsInline: true });
+      v.addEventListener('playing', showVideo, { once: true });
+      heroVideo.replaceChildren(v);
+    } else if (yt) {
+      window.onYouTubeIframeAPIReady = () => {
+        const player = new YT.Player('heroPlayer', {
+          host: 'https://www.youtube-nocookie.com',
+          videoId: yt,
+          playerVars: {
+            autoplay: 1, mute: 1, controls: 0, disablekb: 1, fs: 0, rel: 0, playsinline: 1,
+            iv_load_policy: 3, modestbranding: 1, start, ...(end ? { end } : {}),
+          },
+          events: {
+            onReady: e => { e.target.mute(); e.target.playVideo(); },
+            onStateChange: e => {
+              // reveal only once frames are moving, so the YouTube title/spinner is never seen
+              if (e.data === YT.PlayerState.PLAYING) setTimeout(showVideo, 400);
+              if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(start, true); e.target.playVideo(); }
+            },
+          },
+        });
+        // pause while the hero is off-screen
+        new IntersectionObserver(([en]) => {
+          if (!player.getPlayerState) return;
+          en.isIntersecting ? player.playVideo() : player.pauseVideo();
+        }).observe(hero);
+      };
+      const s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(s);
+    }
   }
 
   /* ---------- Hero canvas: glowing dots draw key profiles and key outlines ---------- */
@@ -165,7 +214,8 @@
   };
 
   const draw = () => {
-    if (scrollY > H) { requestAnimationFrame(draw); return; } // hero off-screen: skip work
+    // hero off-screen, or the background video is playing: skip the work
+    if (scrollY > H || hero.classList.contains('has-video')) { requestAnimationFrame(draw); return; }
     ctx.clearRect(0, 0, W, H);
 
     // dot grid
