@@ -93,11 +93,16 @@
   let introResolve;
   const introDone = new Promise(r => { introResolve = r; });
   setTimeout(introResolve, reduceMotion ? 0 : 2600);
-  const showVideo = () => introDone.then(() => hero.classList.add('has-video'));
+  let revealTimer, looping = false, wantVideo = false;
+  const showVideo = () => { wantVideo = true; introDone.then(() => { if (wantVideo) hero.classList.add('has-video'); }); };
+  const hideVideo = () => { wantVideo = false; clearTimeout(revealTimer); hero.classList.remove('has-video'); };
   // the headline and the van come in right after the key is drawn
   introDone.then(() => hero.classList.remove('hero--intro'));
 
-  if (heroVideo && !reduceMotion && !saveData) {
+  // phones: no YouTube background (its play/pause icon lingers on touch screens and it costs mobile data);
+  // the animated background stays. A local mp4 (data-mp4) still plays everywhere.
+  const phone = matchMedia('(max-width: 820px), (pointer: coarse)').matches;
+  if (heroVideo && !reduceMotion && !saveData && (heroVideo.dataset.mp4 || !phone)) {
     const { yt, mp4 } = heroVideo.dataset;
     const start = +heroVideo.dataset.start || 0;
     const end = +heroVideo.dataset.end || 0;
@@ -119,12 +124,26 @@
           events: {
             onReady: e => { e.target.mute(); e.target.playVideo(); },
             onStateChange: e => {
-              // reveal only once frames are moving, so the YouTube title/spinner is never seen
-              if (e.data === YT.PlayerState.PLAYING) setTimeout(showVideo, 400);
+              // YouTube draws its own play/pause icon and spinner for a moment whenever playback
+              // starts, buffers or restarts — and it can't be switched off. So the video is shown
+              // only after it has been playing smoothly for a few seconds, and hidden in every
+              // other state (the animated background stays underneath).
+              clearTimeout(revealTimer);
+              if (e.data === YT.PlayerState.PLAYING) { looping = false; revealTimer = setTimeout(showVideo, 3200); }
+              else hideVideo();
               if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(start, true); e.target.playVideo(); }
             },
           },
         });
+        // restart the segment shortly before its end — hidden, so the restart icon is never seen
+        setInterval(() => {
+          if (!end || looping || player.getPlayerState?.() !== YT.PlayerState.PLAYING) return;
+          if (player.getCurrentTime() > end - 1.6) {
+            looping = true;
+            hideVideo();
+            setTimeout(() => player.seekTo(start, true), 1500); // after the fade-out
+          }
+        }, 400);
         // pause while the hero is off-screen
         new IntersectionObserver(([en]) => {
           if (!player.getPlayerState) return;
