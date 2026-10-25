@@ -477,8 +477,14 @@
 <section class="ai" id="ai" role="dialog" aria-label="Key Man chat assistant" aria-hidden="true">
   <header class="ai__head">
     <div class="ai__avatar">KM</div>
-    <div><b>Key Man Assistant</b><span><i class="ai__online"></i> Online · replies instantly</span></div>
+    <div><b>Key Man Assistant</b><span><i class="ai__online"></i> <span id="aiStatus">Online · replies instantly</span></span></div>
     <button class="ai__close" id="aiClose" aria-label="Close assistant">×</button>
+    <div class="ai__langs" id="aiLangs" role="group" aria-label="Chat language">
+      <button type="button" data-lang="en" title="English">EN</button>
+      <button type="button" data-lang="ru" title="Русский">RU</button>
+      <button type="button" data-lang="uk" title="Українська">UA</button>
+      <button type="button" data-lang="es" title="Español">ES</button>
+    </div>
   </header>
   <div class="ai__body" id="aiBody"></div>
   <div class="ai__chips" id="aiChips">
