@@ -279,8 +279,7 @@
       const s = await api('/api/admin/status');
       const row = (title, ok, text) => `<div class="stat"><b>${title}</b><span class="${ok ? 'ok' : 'bad'}">${text}</span></div>`;
       $('#status').innerHTML = [
-        row('Хранилище заявок и текстов', s.storage !== 'missing', s.storage === 'redis' ? 'Подключено (Upstash Redis)' : s.storage === 'missing' ? 'Не подключено' : 'Локальный режим (память)'),
-        row('Хранилище фото', s.photos !== 'missing', s.photos === 'blob' ? 'Подключено (Vercel Blob)' : s.photos === 'missing' ? 'Не подключено' : 'Локальная папка'),
+        row('Хранилище (заявки, тексты, фото)', s.storage !== 'missing', s.storage === 'blob' ? 'Подключено (Vercel Blob, приватное)' : s.storage === 'missing' ? 'Не подключено' : 'Локальный режим (память)'),
         row('Уведомления в Telegram', s.telegram, s.telegram ? 'Включены' : 'Не настроены'),
         row('Свой пароль админки', s.password, s.password ? 'Задан' : 'Не задан'),
       ].join('');
