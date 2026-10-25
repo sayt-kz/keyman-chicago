@@ -13,13 +13,20 @@
 </head>
 <body>
 
+<!-- interface language: RU / EN / UA (data-a = translation key, see admin.js) -->
+<template id="langTpl">
+  <div class="alang" role="group" aria-label="Language">
+    <button type="button" data-ui-lang="ru">RU</button><button type="button" data-ui-lang="en">EN</button><button type="button" data-ui-lang="uk">UA</button>
+  </div>
+</template>
+
 <!-- ============ LOGIN ============ -->
 <main class="login" id="login" hidden>
   <form class="login__card" id="loginForm">
-    <img src="../img/logo.png" alt="" width="56" height="56">
-    <h1>Key Man<br><span>админ-панель</span></h1>
-    <label>Пароль<input type="password" name="password" autocomplete="current-password" required autofocus></label>
-    <button class="btn btn--primary" type="submit">Войти</button>
+    <div class="login__top"><img src="../img/logo.png" alt="" width="56" height="56"><div class="lang-slot"></div></div>
+    <h1>Key Man<br><span data-a="panel">админ-панель</span></h1>
+    <label><span data-a="password">Пароль</span><input type="password" name="password" autocomplete="current-password" required autofocus></label>
+    <button class="btn btn--primary" type="submit" data-a="signIn">Войти</button>
     <p class="login__err" id="loginErr" hidden></p>
   </form>
 </main>
@@ -29,14 +36,15 @@
   <aside class="side">
     <a class="side__logo" href="../" target="_blank" rel="noopener"><img src="../img/logo.png" alt=""><span>KEY<b>MAN</b></span></a>
     <nav class="side__nav">
-      <button data-view="leads" class="is-active">Заявки <i class="badge" id="newCount" hidden>0</i></button>
-      <button data-view="texts">Тексты сайта</button>
-      <button data-view="gallery">Галерея</button>
-      <button data-view="settings">Настройки</button>
+      <button data-view="leads" class="is-active"><span data-a="navLeads">Заявки</span> <i class="badge" id="newCount" hidden>0</i></button>
+      <button data-view="texts" data-a="navTexts">Тексты сайта</button>
+      <button data-view="gallery" data-a="navGallery">Галерея</button>
+      <button data-view="settings" data-a="navSettings">Настройки</button>
     </nav>
     <div class="side__foot">
-      <a href="../" target="_blank" rel="noopener">Открыть сайт ↗</a>
-      <button id="logout">Выйти</button>
+      <div class="lang-slot"></div>
+      <a href="../" target="_blank" rel="noopener" data-a="openSite">Открыть сайт ↗</a>
+      <button id="logout" data-a="logout">Выйти</button>
     </div>
   </aside>
 
@@ -44,18 +52,18 @@
     <!-- LEADS -->
     <section class="view is-active" data-view="leads">
       <header class="view__head">
-        <div><h2>Заявки</h2><p>Из формы на сайте, чата и «Быстрой заявки». Обновляются каждую минуту.</p></div>
+        <div><h2 data-a="navLeads">Заявки</h2><p data-a="leadsHint">Из формы на сайте, чата и «Быстрой заявки». Обновляются каждую минуту.</p></div>
         <div class="view__actions">
-          <button class="btn" id="leadsRefresh">Обновить</button>
-          <button class="btn" id="leadsCsv">Скачать CSV</button>
+          <button class="btn" id="leadsRefresh" data-a="refresh">Обновить</button>
+          <button class="btn" id="leadsCsv" data-a="csv">Скачать CSV</button>
         </div>
       </header>
       <div class="filters" id="leadFilters">
-        <button data-f="all" class="is-active">Все</button>
-        <button data-f="new">Новые</button>
-        <button data-f="work">В работе</button>
-        <button data-f="done">Выполнено</button>
-        <button data-f="spam">Спам</button>
+        <button data-f="all" class="is-active" data-a="fAll">Все</button>
+        <button data-f="new" data-a="fNew">Новые</button>
+        <button data-f="work" data-a="st_work">В работе</button>
+        <button data-f="done" data-a="st_done">Выполнено</button>
+        <button data-f="spam" data-a="st_spam">Спам</button>
       </div>
       <div class="leads" id="leads"></div>
     </section>
@@ -63,10 +71,10 @@
     <!-- TEXTS -->
     <section class="view" data-view="texts">
       <header class="view__head">
-        <div><h2>Тексты сайта</h2><p>Русский, английский и украинский. Изменённые поля подсвечены; пустое поле = текст по умолчанию.</p></div>
+        <div><h2 data-a="navTexts">Тексты сайта</h2><p data-a="textsHint">Русский, английский и украинский. Изменённые поля подсвечены; пустое поле = текст по умолчанию.</p></div>
         <div class="view__actions">
-          <input class="search" id="textSearch" type="search" placeholder="Поиск по тексту…">
-          <button class="btn btn--primary" id="textsSave">Сохранить</button>
+          <input class="search" id="textSearch" type="search" placeholder="Поиск по тексту…" data-a-ph="search">
+          <button class="btn btn--primary" id="textsSave" data-a="save">Сохранить</button>
         </div>
       </header>
       <div id="texts"></div>
@@ -75,24 +83,24 @@
     <!-- GALLERY -->
     <section class="view" data-view="gallery">
       <header class="view__head">
-        <div><h2>Галерея «Реальные выезды»</h2><p>Фото и видео с YouTube. Порядок — как на сайте. Не забудьте нажать «Сохранить».</p></div>
+        <div><h2 data-a="galleryTitle">Галерея «Реальные выезды»</h2><p data-a="galleryHint">Фото и видео с YouTube. Порядок — как на сайте. Не забудьте нажать «Сохранить».</p></div>
         <div class="view__actions">
-          <label class="btn">Добавить фото<input type="file" id="photoInput" accept="image/*" multiple hidden></label>
-          <button class="btn" id="ytAdd">Добавить видео YouTube</button>
-          <button class="btn btn--primary" id="gallerySave">Сохранить</button>
+          <label class="btn"><span data-a="addPhoto">Добавить фото</span><input type="file" id="photoInput" accept="image/*" multiple hidden></label>
+          <button class="btn" id="ytAdd" data-a="addVideo">Добавить видео YouTube</button>
+          <button class="btn btn--primary" id="gallerySave" data-a="save">Сохранить</button>
         </div>
       </header>
       <div class="gallery" id="gallery"></div>
-      <p class="muted"><button class="link" id="galleryReset">Вернуть исходную галерею сайта</button></p>
+      <p class="muted"><button class="link" id="galleryReset" data-a="galleryReset">Вернуть исходную галерею сайта</button></p>
     </section>
 
     <!-- SETTINGS -->
     <section class="view" data-view="settings">
-      <header class="view__head"><div><h2>Настройки</h2><p>Что подключено на сервере (Vercel → Settings → Environment Variables / Storage).</p></div></header>
+      <header class="view__head"><div><h2 data-a="navSettings">Настройки</h2><p data-a="settingsHint">Что подключено на сервере (Vercel → Settings → Environment Variables / Storage).</p></div></header>
       <div class="status" id="status"></div>
       <div class="help">
-        <h3>Как подключить</h3>
-        <ol>
+        <h3 data-a="howTo">Как подключить</h3>
+        <ol data-a="howToList">
           <li><b>Хранилище</b> — Vercel → Storage → Blob (Private) → Connect к проекту. В нём лежат заявки, тексты и фото.</li>
           <li><b>Пароль админки</b> — переменная <code>ADMIN_PASSWORD</code>.</li>
           <li><b>Уведомления в Telegram</b> — создайте бота у @BotFather, добавьте переменные <code>TELEGRAM_BOT_TOKEN</code> и <code>TELEGRAM_CHAT_ID</code>.</li>

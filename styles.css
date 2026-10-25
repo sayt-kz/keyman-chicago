@@ -730,3 +730,9 @@ p { margin: 0 0 1em; }
   .car__body, .car__glass, .car__wheel { stroke-dashoffset: 0; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* intro: the glowing dot draws a big key in the middle first, then the hero content comes in */
+.hero__grid { transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.hero--intro .hero__grid { opacity: 0; transform: translateY(18px); }
+.hero--intro .vanstage .van, .hero--intro .vanstage .van img, .hero--intro .vanstage__speed i,
+.hero--intro .vanstage__shadow, .hero--intro .vanstage .scene__badge { animation-play-state: paused; }
