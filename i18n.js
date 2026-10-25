@@ -153,7 +153,7 @@
       uk: 'Надсилаючи заявку, ви погоджуєтеся з <a href="https://keymanchicago.com/privacy">політикою обробки персональних даних</a>.',
       es: 'Al enviar, acepta nuestra <a href="https://keymanchicago.com/privacy">política de tratamiento de datos personales</a>.',
     },
-    'fm.ok': { en: "✅ Thanks! We'll call you back shortly.", ru: '✅ Спасибо! Скоро перезвоним.', uk: '✅ Дякуємо! Незабаром передзвонимо.', es: '✅ ¡Gracias! Le llamaremos pronto.' },
+    'fm.ok': { en: "Thanks! We'll call you back shortly.", ru: 'Спасибо! Скоро перезвоним.', uk: 'Дякуємо! Незабаром передзвонимо.', es: '¡Gracias! Le llamaremos pronto.' },
 
     'ft.copy': { en: '© 2026 Key Man Chicago. Copying of materials is prohibited.', ru: '© 2026 Key Man Chicago. Копирование материалов запрещено.', uk: '© 2026 Key Man Chicago. Копіювання матеріалів заборонено.', es: '© 2026 Key Man Chicago. Prohibida la copia de materiales.' },
     'ft.privacy': { en: 'Privacy policy', ru: 'Политика конфиденциальности', uk: 'Політика конфіденційності', es: 'Política de privacidad' },
@@ -225,7 +225,9 @@
     if (!silent) dispatchEvent(new CustomEvent('km:lang', { detail: { lang, from: 'site' } }));
   };
 
-  window.kmLang = { get: () => current, set, t: (key, lang = current) => T[key]?.[lang] ?? T[key]?.en ?? key };
+  // built-in texts, before admin-panel edits (the admin page compares against these)
+  const DEFAULTS = JSON.parse(JSON.stringify(T));
+  window.kmLang = { get: () => current, set, t: (key, lang = current) => T[key]?.[lang] || T[key]?.en || key, defaults: DEFAULTS, langs: LANGS };
 
   // the chat bot switched language → follow it
   addEventListener('km:lang', e => { if (e.detail.from !== 'site') set(e.detail.lang, { silent: true }); });
@@ -245,4 +247,37 @@
   }
 
   apply(current);
+
+  /* ---------- edits from the admin panel (/api/content on Vercel) ----------
+     On static hosting the request just fails and the built-in texts/gallery stay. */
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const buildGallery = items => {
+    const track = document.getElementById('showcase');
+    if (!track || !items?.length) return;
+    track.innerHTML = items.map((it, i) => {
+      T[`g.${i}.tag`] = it.tag || {};
+      T[`g.${i}.cap`] = it.cap || {};
+      const yt = it.type === 'youtube';
+      const thumb = yt ? `https://i.ytimg.com/vi/${encodeURIComponent(it.src)}/${it.vertical ? 'oar2' : 'hqdefault'}.jpg` : it.src;
+      return `<button class="shot" data-type="${yt ? 'youtube' : 'image'}"${it.vertical ? ' data-vertical' : ''} data-src="${esc(it.src)}">
+        <img src="${esc(thumb)}" alt="" loading="lazy">
+        <span class="shot__tag" data-i18n="g.${i}.tag"></span><span class="shot__cap" data-i18n="g.${i}.cap"></span></button>`;
+    }).join('');
+    dispatchEvent(new CustomEvent('km:gallery'));
+  };
+
+  if (location.protocol.startsWith('http') && !document.documentElement.hasAttribute('data-admin')) {
+    fetch('/api/content', { headers: { Accept: 'application/json' }, cache: 'no-cache' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(data => {
+        if (!data) return;
+        for (const [key, val] of Object.entries(data.texts || {})) {
+          T[key] = { ...(T[key] || {}) };
+          for (const l of LANGS) if (val?.[l]) T[key][l] = val[l];
+        }
+        if (Array.isArray(data.gallery)) buildGallery(data.gallery);
+        apply(current);
+      })
+      .catch(() => { /* static hosting: no API */ });
+  }
 })();

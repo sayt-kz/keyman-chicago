@@ -36,10 +36,10 @@
     placeholder: { en: 'Ask anything about car keys…', ru: 'Спросите что угодно про ключи…', uk: 'Запитайте будь-що про ключі…', es: 'Pregunte lo que quiera sobre llaves…' },
     status: { en: 'online', ru: 'онлайн', uk: 'онлайн', es: 'en línea' },
     greet: {
-      en: "Hi! I'm the Key Man assistant 👋\nLocked out, lost your key, or need a spare smart key? Ask me anything.",
-      ru: 'Здравствуйте! Я ассистент Key Man 👋\nЗакрыли ключи в машине, потеряли ключ или нужен запасной смарт-ключ? Спрашивайте.',
-      uk: 'Вітаю! Я асистент Key Man 👋\nЗачинили ключі в машині, загубили ключ чи потрібен запасний смарт-ключ? Питайте.',
-      es: '¡Hola! Soy el asistente de Key Man 👋\n¿Se quedó afuera, perdió la llave o necesita una llave inteligente de repuesto? Pregúnteme.',
+      en: "Hi! I'm the Key Man assistant\nLocked out, lost your key, or need a spare smart key? Ask me anything.",
+      ru: 'Здравствуйте! Я ассистент Key Man\nЗакрыли ключи в машине, потеряли ключ или нужен запасной смарт-ключ? Спрашивайте.',
+      uk: 'Вітаю! Я асистент Key Man\nЗачинили ключі в машині, загубили ключ чи потрібен запасний смарт-ключ? Питайте.',
+      es: '¡Hola! Soy el asistente de Key Man\n¿Se quedó afuera, perdió la llave o necesita una llave inteligente de repuesto? Pregúnteme.',
     },
     switched: {
       en: 'Switched to English 🇺🇸 How can I help?',
@@ -107,30 +107,30 @@
       kw: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'привет', 'здравств', 'добрый', 'доброе утро', 'хай',
         'привіт', 'вітаю', 'добрий день', 'доброго дня', 'добрий вечір', 'hola', 'buenas', 'buenos días', 'buenos dias'],
       r: {
-        en: 'Hi there! 👋 How can I help — locked out, lost a key, or need a spare?',
-        ru: 'Здравствуйте! 👋 Чем помочь — закрыли ключи в машине, потеряли ключ или нужен запасной?',
-        uk: 'Вітаю! 👋 Чим допомогти — зачинили ключі в машині, загубили ключ чи потрібен запасний?',
-        es: '¡Hola! 👋 ¿En qué le ayudo? ¿Se quedó afuera, perdió la llave o necesita una copia?',
+        en: 'Hi there! How can I help — locked out, lost a key, or need a spare?',
+        ru: 'Здравствуйте! Чем помочь — закрыли ключи в машине, потеряли ключ или нужен запасной?',
+        uk: 'Вітаю! Чим допомогти — зачинили ключі в машині, загубили ключ чи потрібен запасний?',
+        es: '¡Hola! ¿En qué le ayudo? ¿Se quedó afuera, perdió la llave o necesita una copia?',
       },
       chips: ['lockout', 'lost', 'spare', 'price'],
     },
     thanks: {
       kw: ['thank', 'thx', 'appreciate', 'спасиб', 'благодар', 'дякую', 'дяки', 'gracias'],
       r: {
-        en: 'You\'re welcome! If you need us, we\'re one call away: ' + PHONE + '. Drive safe! 🚗',
-        ru: 'Пожалуйста! Если понадобимся — звоните: ' + PHONE + '. Хорошей дороги! 🚗',
-        uk: 'Будь ласка! Якщо знадобимося — телефонуйте: ' + PHONE + '. Гарної дороги! 🚗',
-        es: '¡De nada! Si nos necesita, llámenos: ' + PHONE + '. ¡Buen camino! 🚗',
+        en: 'You\'re welcome! If you need us, we\'re one call away: ' + PHONE + '. Drive safe!',
+        ru: 'Пожалуйста! Если понадобимся — звоните: ' + PHONE + '. Хорошей дороги!',
+        uk: 'Будь ласка! Якщо знадобимося — телефонуйте: ' + PHONE + '. Гарної дороги!',
+        es: '¡De nada! Si nos necesita, llámenos: ' + PHONE + '. ¡Buen camino!',
       },
       chips: ['book', 'call'],
     },
     bye: {
       kw: ['bye', 'see you', 'goodbye', 'пока', 'до свидан', 'всего доброго', 'бувай', 'до побачення', 'на все добре', 'adios', 'adiós', 'hasta luego'],
       r: {
-        en: 'Have a great day! Save our number just in case: ' + PHONE + ' 🔑',
-        ru: 'Хорошего дня! Сохраните наш номер на всякий случай: ' + PHONE + ' 🔑',
-        uk: 'Гарного дня! Збережіть наш номер про всяк випадок: ' + PHONE + ' 🔑',
-        es: '¡Que tenga un buen día! Guarde nuestro número por si acaso: ' + PHONE + ' 🔑',
+        en: 'Have a great day! Save our number just in case: ' + PHONE + '',
+        ru: 'Хорошего дня! Сохраните наш номер на всякий случай: ' + PHONE + '',
+        uk: 'Гарного дня! Збережіть наш номер про всяк випадок: ' + PHONE + '',
+        es: '¡Que tenga un buen día! Guarde nuestro número por si acaso: ' + PHONE + '',
       },
       chips: [],
     },
@@ -141,10 +141,10 @@
         'зачинив', 'зачинила', 'замкнув', 'зачинилас', 'ключі всередині', 'ключі в машині', 'ключ в машині', 'ключі в салоні', 'розкри', 'відкрити машину', 'відкрити авто', 'не можу відкрити', 'не можу потрапити',
         'me quedé afuera', 'me quede afuera', 'llaves adentro', 'llaves dentro', 'llave adentro', 'abrir mi carro', 'abrir el carro', 'abrir carro', 'encerr', 'cerrado'],
       r: {
-        en: 'Sorry you\'re stuck! 🚨 We handle **emergency lockouts** and open cars **without damage** — at home, at the office or on the roadside. Response time is **from 30 minutes**.\n\nFastest way: call **' + PHONE + '** and tell us where you are. Or leave your number here and we\'ll call you.',
-        ru: 'Неприятная ситуация, но решаемая! 🚨 Мы **вскрываем авто без повреждений** — у дома, офиса или на дороге. Приезд **от 30 минут**.\n\nБыстрее всего — позвонить **' + PHONE + '** и назвать адрес. Или оставьте номер здесь, и мы перезвоним.',
-        uk: 'Неприємна ситуація, але розв\'язувана! 🚨 Ми **відкриваємо авто без пошкоджень** — біля дому, офісу чи на дорозі. Приїзд **від 30 хвилин**.\n\nНайшвидше — зателефонувати **' + PHONE + '** і назвати адресу. Або залиште номер тут, і ми передзвонимо.',
-        es: '¡Lamentamos el problema! 🚨 Abrimos carros **sin daños** — en casa, en la oficina o en la carretera. Llegamos **desde 30 minutos**.\n\nLo más rápido: llame al **' + PHONE + '** y díganos dónde está. O deje su número aquí y le llamamos.',
+        en: 'Sorry you\'re stuck! We handle **emergency lockouts** and open cars **without damage** — at home, at the office or on the roadside. Response time is **from 30 minutes**.\n\nFastest way: call **' + PHONE + '** and tell us where you are. Or leave your number here and we\'ll call you.',
+        ru: 'Неприятная ситуация, но решаемая! Мы **вскрываем авто без повреждений** — у дома, офиса или на дороге. Приезд **от 30 минут**.\n\nБыстрее всего — позвонить **' + PHONE + '** и назвать адрес. Или оставьте номер здесь, и мы перезвоним.',
+        uk: 'Неприємна ситуація, але розв\'язувана! Ми **відкриваємо авто без пошкоджень** — біля дому, офісу чи на дорозі. Приїзд **від 30 хвилин**.\n\nНайшвидше — зателефонувати **' + PHONE + '** і назвати адресу. Або залиште номер тут, і ми передзвонимо.',
+        es: '¡Lamentamos el problema! Abrimos carros **sin daños** — en casa, en la oficina o en la carretera. Llegamos **desde 30 minutos**.\n\nLo más rápido: llame al **' + PHONE + '** y díganos dónde está. O deje su número aquí y le llamamos.',
       },
       chips: ['call', 'book', 'damage', 'ownership'],
     },
@@ -169,10 +169,10 @@
         'дублікат', 'другий ключ', 'ще один ключ', 'зробити ключ', 'виготовити ключ',
         'copia', 'duplicad', 'otra llave', 'llave extra', 'segunda llave', 'repuesto'],
       r: {
-        en: 'Smart move! 👍 A spare key costs much less than replacing a lost one. We **cut and program duplicates on the spot** — regular keys, remotes and smart keys.\n\nWhat\'s your **make, model and year**?',
-        ru: 'Отличное решение! 👍 Запасной ключ стоит гораздо дешевле, чем восстановление утерянного. Делаем **дубликаты на месте** — обычные ключи, с пультом и смарт-ключи.\n\nКакая у вас **марка, модель и год**?',
-        uk: 'Чудове рішення! 👍 Запасний ключ коштує набагато дешевше, ніж відновлення загубленого. Робимо **дублікати на місці** — звичайні ключі, з пультом і смарт-ключі.\n\nЯка у вас **марка, модель і рік**?',
-        es: '¡Buena idea! 👍 Una copia cuesta mucho menos que reemplazar una llave perdida. **Cortamos y programamos copias en el lugar** — llaves normales, con control y llaves inteligentes.\n\n¿Cuál es la **marca, modelo y año**?',
+        en: 'Smart move! A spare key costs much less than replacing a lost one. We **cut and program duplicates on the spot** — regular keys, remotes and smart keys.\n\nWhat\'s your **make, model and year**?',
+        ru: 'Отличное решение! Запасной ключ стоит гораздо дешевле, чем восстановление утерянного. Делаем **дубликаты на месте** — обычные ключи, с пультом и смарт-ключи.\n\nКакая у вас **марка, модель и год**?',
+        uk: 'Чудове рішення! Запасний ключ коштує набагато дешевше, ніж відновлення загубленого. Робимо **дублікати на місці** — звичайні ключі, з пультом і смарт-ключі.\n\nЯка у вас **марка, модель і рік**?',
+        es: '¡Buena idea! Una copia cuesta mucho menos que reemplazar una llave perdida. **Cortamos y programamos copias en el lugar** — llaves normales, con control y llaves inteligentes.\n\n¿Cuál es la **marca, modelo y año**?',
       },
       chips: ['price', 'smart', 'book'],
     },
@@ -197,10 +197,10 @@
         'не працює', 'перестав', 'батарейк', 'сіла', 'програмув', 'прописати', 'кнопки не',
         'no funciona', 'dejó de funcionar', 'dejo de funcionar', 'batería', 'bateria', 'programar', 'control remoto', 'control'],
       r: {
-        en: 'First, a quick tip: if the remote suddenly stopped working, **try a fresh battery** — that\'s the most common cause. 🔋\n\nIf it still doesn\'t work, the key may need **reprogramming or replacement** — we do both on site with OEM equipment.\n\nWhat\'s your **make, model and year**?',
-        ru: 'Сначала простой совет: если пульт внезапно перестал работать, **попробуйте заменить батарейку** — это самая частая причина. 🔋\n\nЕсли не помогло, ключу может понадобиться **перепрограммирование или замена** — делаем это на месте на OEM-оборудовании.\n\nКакая **марка, модель и год**?',
-        uk: 'Спершу проста порада: якщо пульт раптом перестав працювати, **спробуйте замінити батарейку** — це найчастіша причина. 🔋\n\nЯкщо не допомогло, ключу може знадобитися **перепрограмування або заміна** — робимо це на місці на OEM-обладнанні.\n\nЯка **марка, модель і рік**?',
-        es: 'Primero un consejo: si el control dejó de funcionar de repente, **pruebe con una batería nueva** — es la causa más común. 🔋\n\nSi sigue sin funcionar, puede necesitar **reprogramación o reemplazo** — lo hacemos en el lugar con equipo OEM.\n\n¿Cuál es la **marca, modelo y año**?',
+        en: 'First, a quick tip: if the remote suddenly stopped working, **try a fresh battery** — that\'s the most common cause.\n\nIf it still doesn\'t work, the key may need **reprogramming or replacement** — we do both on site with OEM equipment.\n\nWhat\'s your **make, model and year**?',
+        ru: 'Сначала простой совет: если пульт внезапно перестал работать, **попробуйте заменить батарейку** — это самая частая причина.\n\nЕсли не помогло, ключу может понадобиться **перепрограммирование или замена** — делаем это на месте на OEM-оборудовании.\n\nКакая **марка, модель и год**?',
+        uk: 'Спершу проста порада: якщо пульт раптом перестав працювати, **спробуйте замінити батарейку** — це найчастіша причина.\n\nЯкщо не допомогло, ключу може знадобитися **перепрограмування або заміна** — робимо це на місці на OEM-обладнанні.\n\nЯка **марка, модель і рік**?',
+        es: 'Primero un consejo: si el control dejó de funcionar de repente, **pruebe con una batería nueva** — es la causa más común.\n\nSi sigue sin funcionar, puede necesitar **reprogramación o reemplazo** — lo hacemos en el lugar con equipo OEM.\n\n¿Cuál es la **marca, modelo y año**?',
       },
       chips: ['price', 'smart', 'book'],
     },
@@ -276,10 +276,10 @@
     warranty: {
       kw: ['warranty', 'guarantee', 'guaranteed', 'гарант', 'garantía', 'garantia'],
       r: {
-        en: 'Every key we make comes with a **12-month warranty**. ✅ If something goes wrong with it, just call us.',
-        ru: 'На каждый наш ключ — **гарантия 12 месяцев**. ✅ Если что-то пойдёт не так, просто позвоните нам.',
-        uk: 'На кожен наш ключ — **гарантія 12 місяців**. ✅ Якщо щось піде не так, просто зателефонуйте нам.',
-        es: 'Cada llave que hacemos tiene **12 meses de garantía**. ✅ Si algo falla, solo llámenos.',
+        en: 'Every key we make comes with a **12-month warranty**. If something goes wrong with it, just call us.',
+        ru: 'На каждый наш ключ — **гарантия 12 месяцев**. Если что-то пойдёт не так, просто позвоните нам.',
+        uk: 'На кожен наш ключ — **гарантія 12 місяців**. Якщо щось піде не так, просто зателефонуйте нам.',
+        es: 'Cada llave que hacemos tiene **12 meses de garantía**. Si algo falla, solo llámenos.',
       },
       chips: ['price', 'book'],
     },
@@ -343,10 +343,10 @@
         'навчан', 'навчит', 'вчитися', 'стати майстр', 'професія', 'учень',
         'academia', 'curso', 'aprender', 'entrenamiento', 'escuela', 'estudiar'],
       r: {
-        en: '🎓 **Key Man Academy** turns you into a professional automotive locksmith — one of the most in-demand trades in America. Hands-on training in cutting, programming and repairing car keys, and opening locks like a pro.\n\nThere are **3 levels**: Start Pack → PRO Master → True Expert.',
-        ru: '🎓 **Key Man Academy** — обучение профессии автослесаря по ключам, одной из самых востребованных в США. Практика: нарезка, программирование и ремонт автоключей, профессиональное вскрытие замков.\n\n**3 уровня**: Start Pack → PRO Master → True Expert.',
-        uk: '🎓 **Key Man Academy** — навчання професії автослюсаря по ключах, однієї з найзатребуваніших у США. Практика: нарізання, програмування й ремонт автоключів, професійне відкриття замків.\n\n**3 рівні**: Start Pack → PRO Master → True Expert.',
-        es: '🎓 **Key Man Academy** le convierte en cerrajero automotriz profesional — uno de los oficios más demandados en EE. UU. Práctica real: cortar, programar y reparar llaves y abrir cerraduras como un profesional.\n\n**3 niveles**: Start Pack → PRO Master → True Expert.',
+        en: '**Key Man Academy** turns you into a professional automotive locksmith — one of the most in-demand trades in America. Hands-on training in cutting, programming and repairing car keys, and opening locks like a pro.\n\nThere are **3 levels**: Start Pack → PRO Master → True Expert.',
+        ru: '**Key Man Academy** — обучение профессии автослесаря по ключам, одной из самых востребованных в США. Практика: нарезка, программирование и ремонт автоключей, профессиональное вскрытие замков.\n\n**3 уровня**: Start Pack → PRO Master → True Expert.',
+        uk: '**Key Man Academy** — навчання професії автослюсаря по ключах, однієї з найзатребуваніших у США. Практика: нарізання, програмування й ремонт автоключів, професійне відкриття замків.\n\n**3 рівні**: Start Pack → PRO Master → True Expert.',
+        es: '**Key Man Academy** le convierte en cerrajero automotriz profesional — uno de los oficios más demandados en EE. UU. Práctica real: cortar, programar y reparar llaves y abrir cerraduras como un profesional.\n\n**3 niveles**: Start Pack → PRO Master → True Expert.',
       },
       chips: ['levels', 'career', 'academyPrice', 'book'],
     },
@@ -366,10 +366,10 @@
       kw: ['job', 'earn', 'money', 'income', 'business', 'hire', 'hired', 'own business', 'salary', 'работа', 'работу', 'заработ', 'доход', 'бизнес', 'трудоустр', 'зарплат',
         'робота', 'роботу', 'заробі', 'заробля', 'дохід', 'бізнес', 'працевлашт', 'trabajo', 'ganar', 'dinero', 'negocio', 'empleo', 'salario'],
       r: {
-        en: 'After the course you\'ll have the skills to **start your own business** or **get hired immediately** — and start earning much more than before. Stop working for someone else and build your own future. 💪',
-        ru: 'После курса у вас будут навыки, чтобы **открыть своё дело** или **сразу устроиться на работу** — и зарабатывать заметно больше, чем раньше. Хватит работать на кого-то — стройте своё будущее. 💪',
-        uk: 'Після курсу у вас будуть навички, щоб **відкрити власну справу** або **одразу влаштуватися на роботу** — і заробляти помітно більше, ніж раніше. Годі працювати на когось — будуйте своє майбутнє. 💪',
-        es: 'Al terminar tendrá las habilidades para **abrir su propio negocio** o **conseguir trabajo de inmediato** — y ganar mucho más que antes. Deje de trabajar para otros y construya su futuro. 💪',
+        en: 'After the course you\'ll have the skills to **start your own business** or **get hired immediately** — and start earning much more than before. Stop working for someone else and build your own future.',
+        ru: 'После курса у вас будут навыки, чтобы **открыть своё дело** или **сразу устроиться на работу** — и зарабатывать заметно больше, чем раньше. Хватит работать на кого-то — стройте своё будущее.',
+        uk: 'Після курсу у вас будуть навички, щоб **відкрити власну справу** або **одразу влаштуватися на роботу** — і заробляти помітно більше, ніж раніше. Годі працювати на когось — будуйте своє майбутнє.',
+        es: 'Al terminar tendrá las habilidades para **abrir su propio negocio** o **conseguir trabajo de inmediato** — y ganar mucho más que antes. Deje de trabajar para otros y construya su futuro.',
       },
       chips: ['levels', 'academyPrice', 'book'],
     },
@@ -387,20 +387,20 @@
     contact: {
       kw: ['phone', 'number', 'call you', 'contact', 'reach you', 'email', 'телефон', 'номер', 'позвонить', 'контакт', 'связаться', 'почта', 'зателефонувати', 'звʼязатися', "зв'язатися", 'пошта', 'teléfono', 'telefono', 'número', 'numero', 'llamar', 'contacto'],
       r: {
-        en: '📞 Phone: **' + PHONE + '**\n📍 Mobile service across Chicago\n▶️ YouTube: @KeyManChicago\n📸 Instagram: @keyman.chicago',
-        ru: '📞 Телефон: **' + PHONE + '**\n📍 Выезд по всему Чикаго\n▶️ YouTube: @KeyManChicago\n📸 Instagram: @keyman.chicago',
-        uk: '📞 Телефон: **' + PHONE + '**\n📍 Виїзд по всьому Чикаго\n▶️ YouTube: @KeyManChicago\n📸 Instagram: @keyman.chicago',
-        es: '📞 Teléfono: **' + PHONE + '**\n📍 Servicio móvil en todo Chicago\n▶️ YouTube: @KeyManChicago\n📸 Instagram: @keyman.chicago',
+        en: 'Phone: **' + PHONE + '**\nMobile service across Chicago\nYouTube: @KeyManChicago\nInstagram: @keyman.chicago',
+        ru: 'Телефон: **' + PHONE + '**\nВыезд по всему Чикаго\nYouTube: @KeyManChicago\nInstagram: @keyman.chicago',
+        uk: 'Телефон: **' + PHONE + '**\nВиїзд по всьому Чикаго\nYouTube: @KeyManChicago\nInstagram: @keyman.chicago',
+        es: 'Teléfono: **' + PHONE + '**\nServicio móvil en todo Chicago\nYouTube: @KeyManChicago\nInstagram: @keyman.chicago',
       },
       chips: ['call', 'book', 'social'],
     },
     social: {
       kw: ['instagram', 'insta', 'youtube', 'video', 'shorts', 'tiktok', 'social', 'инстаграм', 'инста', 'ютуб', 'видео', 'соцсет', 'інстаграм', 'відео', 'соцмереж', 'redes', 'vídeo', 'videos'],
       r: {
-        en: 'Watch real jobs and key programming on our channels:\n▶️ YouTube & Shorts: youtube.com/@KeyManChicago\n📸 Instagram: @keyman.chicago',
-        ru: 'Реальные выезды и программирование ключей — на наших каналах:\n▶️ YouTube и Shorts: youtube.com/@KeyManChicago\n📸 Instagram: @keyman.chicago',
-        uk: 'Реальні виїзди та програмування ключів — на наших каналах:\n▶️ YouTube і Shorts: youtube.com/@KeyManChicago\n📸 Instagram: @keyman.chicago',
-        es: 'Vea trabajos reales y programación de llaves en nuestros canales:\n▶️ YouTube y Shorts: youtube.com/@KeyManChicago\n📸 Instagram: @keyman.chicago',
+        en: 'Watch real jobs and key programming on our channels:\nYouTube & Shorts: youtube.com/@KeyManChicago\nInstagram: @keyman.chicago',
+        ru: 'Реальные выезды и программирование ключей — на наших каналах:\nYouTube и Shorts: youtube.com/@KeyManChicago\nInstagram: @keyman.chicago',
+        uk: 'Реальні виїзди та програмування ключів — на наших каналах:\nYouTube і Shorts: youtube.com/@KeyManChicago\nInstagram: @keyman.chicago',
+        es: 'Vea trabajos reales y programación de llaves en nuestros canales:\nYouTube y Shorts: youtube.com/@KeyManChicago\nInstagram: @keyman.chicago',
       },
       chips: ['academy', 'book'],
     },
@@ -435,23 +435,23 @@
   };
 
   const CHIP_LABEL = {
-    lockout: { en: "🚨 I'm locked out", ru: '🚨 Закрыл ключи в машине', uk: '🚨 Зачинив ключі в машині', es: '🚨 Me quedé afuera' },
-    lost: { en: '🔍 Lost my key', ru: '🔍 Потерял ключ', uk: '🔍 Загубив ключ', es: '🔍 Perdí la llave' },
-    spare: { en: '🔑 Spare key', ru: '🔑 Запасной ключ', uk: '🔑 Запасний ключ', es: '🔑 Llave de repuesto' },
-    smart: { en: '📡 Smart key / fob', ru: '📡 Смарт-ключ', uk: '📡 Смарт-ключ', es: '📡 Llave inteligente' },
-    price: { en: '💲 Price', ru: '💲 Цена', uk: '💲 Ціна', es: '💲 Precio' },
+    lockout: { en: "I'm locked out", ru: 'Закрыл ключи в машине', uk: 'Зачинив ключі в машині', es: 'Me quedé afuera' },
+    lost: { en: 'Lost my key', ru: 'Потерял ключ', uk: 'Загубив ключ', es: 'Perdí la llave' },
+    spare: { en: 'Spare key', ru: 'Запасной ключ', uk: 'Запасний ключ', es: 'Llave de repuesto' },
+    smart: { en: 'Smart key / fob', ru: 'Смарт-ключ', uk: 'Смарт-ключ', es: 'Llave inteligente' },
+    price: { en: 'Price', ru: 'Цена', uk: 'Ціна', es: 'Precio' },
     eta: { en: '⏱ How fast?', ru: '⏱ Как быстро?', uk: '⏱ Як швидко?', es: '⏱ ¿Qué tan rápido?' },
-    area: { en: '📍 Service area', ru: '📍 Где работаете', uk: '📍 Де працюєте', es: '📍 Zona de servicio' },
+    area: { en: 'Service area', ru: 'Где работаете', uk: 'Де працюєте', es: 'Zona de servicio' },
     dealer: { en: 'vs Dealership', ru: 'Дешевле дилера?', uk: 'Дешевше за дилера?', es: '¿vs concesionario?' },
     damage: { en: 'Any damage?', ru: 'Без повреждений?', uk: 'Без пошкоджень?', es: '¿Sin daños?' },
     ownership: { en: 'What docs needed?', ru: 'Какие документы?', uk: 'Які документи?', es: '¿Qué documentos?' },
-    academy: { en: '🎓 Academy', ru: '🎓 Академия', uk: '🎓 Академія', es: '🎓 Academia' },
+    academy: { en: 'Academy', ru: 'Академия', uk: 'Академія', es: 'Academia' },
     levels: { en: 'Course levels', ru: 'Уровни курса', uk: 'Рівні курсу', es: 'Niveles' },
     career: { en: 'Jobs after course', ru: 'Работа после курса', uk: 'Робота після курсу', es: 'Trabajo después' },
     academyPrice: { en: 'Course price', ru: 'Цена курса', uk: 'Ціна курсу', es: 'Precio del curso' },
-    social: { en: '▶️ Videos', ru: '▶️ Видео', uk: '▶️ Відео', es: '▶️ Videos' },
-    book: { en: '📝 Request a callback', ru: '📝 Заказать звонок', uk: '📝 Замовити дзвінок', es: '📝 Pedir llamada' },
-    call: { en: `📞 Call ${PHONE}`, ru: '📞 Позвонить', uk: '📞 Зателефонувати', es: '📞 Llamar' },
+    social: { en: 'Videos', ru: 'Видео', uk: 'Відео', es: 'Videos' },
+    book: { en: 'Request a callback', ru: 'Заказать звонок', uk: 'Замовити дзвінок', es: 'Pedir llamada' },
+    call: { en: `Call ${PHONE}`, ru: 'Позвонить', uk: 'Зателефонувати', es: 'Llamar' },
   };
   const START_CHIPS = ['lockout', 'lost', 'spare', 'price', 'eta', 'academy'];
 
@@ -568,8 +568,8 @@
 
   /* ================= Booking flow ================= */
   const F = {
-    vehicle: { en: 'Great, let\'s get you a callback. 📝 What car is it? (make, model, year)', ru: 'Отлично, оформим обратный звонок. 📝 Какая машина? (марка, модель, год)', uk: 'Чудово, оформимо зворотний дзвінок. 📝 Яка машина? (марка, модель, рік)', es: 'Perfecto, pidamos su llamada. 📝 ¿Qué carro es? (marca, modelo, año)' },
-    vehicleAcademy: { en: 'Great! 📝 I\'ll pass your request to the Academy.', ru: 'Отлично! 📝 Передам заявку в Академию.', uk: 'Чудово! 📝 Передам заявку до Академії.', es: '¡Perfecto! 📝 Pasaré su solicitud a la Academia.' },
+    vehicle: { en: 'Great, let\'s get you a callback. What car is it? (make, model, year)', ru: 'Отлично, оформим обратный звонок. Какая машина? (марка, модель, год)', uk: 'Чудово, оформимо зворотний дзвінок. Яка машина? (марка, модель, рік)', es: 'Perfecto, pidamos su llamada. ¿Qué carro es? (marca, modelo, año)' },
+    vehicleAcademy: { en: 'Great! I\'ll pass your request to the Academy.', ru: 'Отлично! Передам заявку в Академию.', uk: 'Чудово! Передам заявку до Академії.', es: '¡Perfecto! Pasaré su solicitud a la Academia.' },
     location: { en: 'Where are you located? (address, intersection or neighborhood)', ru: 'Где вы находитесь? (адрес, перекрёсток или район)', uk: 'Де ви знаходитеся? (адреса, перехрестя або район)', es: '¿Dónde se encuentra? (dirección, cruce de calles o barrio)' },
     name: { en: 'What\'s your name?', ru: 'Как к вам обращаться?', uk: 'Як до вас звертатися?', es: '¿Cuál es su nombre?' },
     phone: { en: 'And your phone number?', ru: 'И ваш номер телефона?', uk: 'І ваш номер телефону?', es: '¿Y su número de teléfono?' },
@@ -579,10 +579,10 @@
   const done = d => {
     const lines = `\n• ${d.service}${d.vehicle ? '\n• ' + d.vehicle : ''}${d.location ? '\n• ' + d.location : ''}\n• ${d.phone}`;
     return {
-      en: `✅ Thank you, ${d.name}! Your request is sent:${lines}\n\nWe'll call you back shortly. If it's urgent, call **${PHONE}** now.`,
-      ru: `✅ Спасибо, ${d.name}! Заявка отправлена:${lines}\n\nСкоро перезвоним. Если срочно — звоните **${PHONE}**.`,
-      uk: `✅ Дякуємо, ${d.name}! Заявку надіслано:${lines}\n\nНезабаром передзвонимо. Якщо терміново — телефонуйте **${PHONE}**.`,
-      es: `✅ ¡Gracias, ${d.name}! Su solicitud fue enviada:${lines}\n\nLe llamaremos pronto. Si es urgente, llame al **${PHONE}** ahora.`,
+      en: `Thank you, ${d.name}! Your request is sent:${lines}\n\nWe'll call you back shortly. If it's urgent, call **${PHONE}** now.`,
+      ru: `Спасибо, ${d.name}! Заявка отправлена:${lines}\n\nСкоро перезвоним. Если срочно — звоните **${PHONE}**.`,
+      uk: `Дякуємо, ${d.name}! Заявку надіслано:${lines}\n\nНезабаром передзвонимо. Якщо терміново — телефонуйте **${PHONE}**.`,
+      es: `¡Gracias, ${d.name}! Su solicitud fue enviada:${lines}\n\nLe llamaremos pronto. Si es urgente, llame al **${PHONE}** ahora.`,
     }[ctx.lang];
   };
 
@@ -679,20 +679,20 @@
         const eu = EUROPEAN.includes(ctx.brand);
         const v = car();
         return await say({
-          en: `Got it — **${v}**. ✅ ${ctx.brand ? `We work with ${ctx.brand}${eu ? ', including high-security European systems' : ''}.` : ''}\n\nWhat do you need: a spare, a lost key replaced, a smart key, or a lockout?`,
-          ru: `Понял — **${v}**. ✅ ${ctx.brand ? `С ${ctx.brand} работаем${eu ? ', в том числе с европейскими системами повышенной защиты' : ''}.` : ''}\n\nЧто нужно: дубликат, восстановление утерянного ключа, смарт-ключ или вскрытие?`,
-          uk: `Зрозумів — **${v}**. ✅ ${ctx.brand ? `З ${ctx.brand} працюємо${eu ? ', зокрема з європейськими системами підвищеного захисту' : ''}.` : ''}\n\nЩо потрібно: дублікат, відновлення загубленого ключа, смарт-ключ чи відкриття авто?`,
-          es: `Entendido — **${v}**. ✅ ${ctx.brand ? `Trabajamos con ${ctx.brand}${eu ? ', incluidos sistemas europeos de alta seguridad' : ''}.` : ''}\n\n¿Qué necesita: una copia, reemplazar una llave perdida, una llave inteligente o abrir el carro?`,
+          en: `Got it — **${v}**. ${ctx.brand ? `We work with ${ctx.brand}${eu ? ', including high-security European systems' : ''}.` : ''}\n\nWhat do you need: a spare, a lost key replaced, a smart key, or a lockout?`,
+          ru: `Понял — **${v}**. ${ctx.brand ? `С ${ctx.brand} работаем${eu ? ', в том числе с европейскими системами повышенной защиты' : ''}.` : ''}\n\nЧто нужно: дубликат, восстановление утерянного ключа, смарт-ключ или вскрытие?`,
+          uk: `Зрозумів — **${v}**. ${ctx.brand ? `З ${ctx.brand} працюємо${eu ? ', зокрема з європейськими системами підвищеного захисту' : ''}.` : ''}\n\nЩо потрібно: дублікат, відновлення загубленого ключа, смарт-ключ чи відкриття авто?`,
+          es: `Entendido — **${v}**. ${ctx.brand ? `Trabajamos con ${ctx.brand}${eu ? ', incluidos sistemas europeos de alta seguridad' : ''}.` : ''}\n\n¿Qué necesita: una copia, reemplazar una llave perdida, una llave inteligente o abrir el carro?`,
         }[ctx.lang], ['spare', 'lost', 'smart', 'lockout']);
       }
 
       if (!id) {
         ctx.misses++;
         return await say(ctx.misses > 1 ? {
-          en: `I may not have understood that one 🙈 The technician can answer anything by phone: **${PHONE}**. Or pick a topic below.`,
-          ru: `Кажется, я не совсем понял 🙈 Мастер ответит на любой вопрос по телефону: **${PHONE}**. Или выберите тему ниже.`,
-          uk: `Здається, я не зовсім зрозумів 🙈 Майстер відповість на будь-яке питання телефоном: **${PHONE}**. Або оберіть тему нижче.`,
-          es: `Creo que no entendí bien 🙈 El técnico puede responder cualquier pregunta por teléfono: **${PHONE}**. O elija un tema abajo.`,
+          en: `I may not have understood that one The technician can answer anything by phone: **${PHONE}**. Or pick a topic below.`,
+          ru: `Кажется, я не совсем понял Мастер ответит на любой вопрос по телефону: **${PHONE}**. Или выберите тему ниже.`,
+          uk: `Здається, я не зовсім зрозумів Майстер відповість на будь-яке питання телефоном: **${PHONE}**. Або оберіть тему нижче.`,
+          es: `Creo que no entendí bien El técnico puede responder cualquier pregunta por teléfono: **${PHONE}**. O elija un tema abajo.`,
         }[ctx.lang] : {
           en: 'I can help with **lockouts, lost keys, spare keys, smart keys & remotes**, prices, timing, and our locksmith **Academy**. What happened — and what car do you drive?',
           ru: 'Я помогу с **вскрытием авто, утерей ключей, дубликатами, смарт-ключами и пультами**, ценами, сроками и нашей **Академией**. Что случилось и какая у вас машина?',
