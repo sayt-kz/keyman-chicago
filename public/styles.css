@@ -405,7 +405,14 @@ p { margin: 0 0 1em; }
   transition: transform .3s cubic-bezier(.2, .8, .2, 1), opacity .3s;
 }
 .ai.is-open { transform: none; opacity: 1; pointer-events: auto; }
-.ai__head { display: flex; align-items: center; gap: 12px; padding: 16px 18px; background: #000; color: #fff; }
+.ai__head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 16px 18px 12px; background: #000; color: #fff; }
+.ai__head .ai__langs { flex: 1 0 100%; display: grid; flex-direction: initial; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 4px; border-radius: 10px; background: #1a1a1a; }
+.ai__langs button {
+  padding: 7px 0; border-radius: 7px; color: #a3a3a3;
+  font-family: var(--display); font-weight: 700; font-size: .72rem; letter-spacing: .06em; transition: background .2s, color .2s;
+}
+.ai__langs button:hover { color: #fff; }
+.ai__langs button.is-active { background: var(--amber); color: #000; }
 .ai__avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--amber); color: #000; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: .8rem; }
 .ai__head div { display: flex; flex-direction: column; line-height: 1.3; }
 .ai__head b { font-family: var(--display); text-transform: uppercase; font-size: .85rem; }
