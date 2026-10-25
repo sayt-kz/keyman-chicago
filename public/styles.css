@@ -147,11 +147,16 @@ p { margin: 0 0 1em; }
 .hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity 1s; }
 /* background video (see app.js) — sized to always cover the hero */
 .hero__video { position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: 0; transition: opacity 1.4s ease; container-type: size; }
-.hero__video iframe, .hero__video video {
-  position: absolute; top: 50%; left: 50%; border: 0;
-  width: max(100cqw, 177.78cqh); height: max(56.25cqw, 100cqh);
-  transform: translate(-50%, -50%) scale(1.15); /* the zoom also hides YouTube's edge UI */
-  object-fit: cover;
+.hero__video video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+/* YouTube draws its play/pause icon in the centre of the player and its logo in a corner — neither can
+   be turned off. The player is made twice as wide as the hero and its centre (and right half) is pushed
+   past the right edge, so the icon and the logo are always off-screen; the left half of the frame fills the hero. */
+.hero__video iframe {
+  position: absolute; top: 50%; left: calc(100% + 90px); border: 0;
+  width: max(calc(200cqw + 180px), 177.78cqh); height: max(calc((200cqw + 180px) * .5625), 100cqh);
+  transform: translate(-50%, -50%);
 }
 .hero__shade {
   position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1.4s ease;
