@@ -9,7 +9,7 @@ const tri = (o, n) => Object.fromEntries(LANGS.map(l => [l, str(o?.[l], n)]));
 
 export default route(["GET", "PUT"], requireAdmin(async (req, res) => {
   if (req.method === "GET") {
-    const [texts, gallery] = await Promise.all([getJson("content:texts", {}), getJson("content:gallery", null)]);
+    const [texts, gallery] = await Promise.all([getJson("content/texts.json", {}), getJson("content/gallery.json", null)]);
     return send(res, 200, { texts, gallery }, { "Cache-Control": "no-store" });
   }
 
@@ -19,7 +19,7 @@ export default route(["GET", "PUT"], requireAdmin(async (req, res) => {
     for (const [key, val] of Object.entries(body.texts).slice(0, 500)) {
       if (/^[\w.-]{1,40}$/.test(key) && val && typeof val === "object") clean[key] = tri(val, 2000);
     }
-    await setJson("content:texts", clean);
+    await setJson("content/texts.json", clean);
   }
   if ("gallery" in body) {
     const g = Array.isArray(body.gallery) ? body.gallery.slice(0, 60).map(it => ({
@@ -29,7 +29,7 @@ export default route(["GET", "PUT"], requireAdmin(async (req, res) => {
       tag: tri(it.tag, 40),
       cap: tri(it.cap, 120),
     })).filter(it => it.src) : null;
-    await setJson("content:gallery", g);
+    await setJson("content/gallery.json", g);
   }
   send(res, 200, { ok: true });
 }));

@@ -93,8 +93,7 @@
       <div class="help">
         <h3>Как подключить</h3>
         <ol>
-          <li><b>Хранилище заявок и текстов</b> — Vercel → Storage → Upstash for Redis → Create → Connect к проекту.</li>
-          <li><b>Хранилище фото</b> — Vercel → Storage → Blob → Create → Connect к проекту.</li>
+          <li><b>Хранилище</b> — Vercel → Storage → Blob (Private) → Connect к проекту. В нём лежат заявки, тексты и фото.</li>
           <li><b>Пароль админки</b> — переменная <code>ADMIN_PASSWORD</code>.</li>
           <li><b>Уведомления в Telegram</b> — создайте бота у @BotFather, добавьте переменные <code>TELEGRAM_BOT_TOKEN</code> и <code>TELEGRAM_CHAT_ID</code>.</li>
           <li>После изменения переменных — Deployments → Redeploy.</li>
