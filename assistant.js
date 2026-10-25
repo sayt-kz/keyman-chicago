@@ -23,9 +23,9 @@
     const l = (navigator.language || 'en').slice(0, 2).toLowerCase();
     return LANGS.includes(l) ? l : 'en';
   };
-  const saved = storage.get('km-chat-lang');
+  const saved = storage.get('km-lang'); // shared with the site language switcher (i18n.js)
   const ctx = {
-    lang: LANGS.includes(saved) ? saved : browserLang(),
+    lang: window.kmLang?.get() || (LANGS.includes(saved) ? saved : browserLang()),
     locked: LANGS.includes(saved), // the visitor picked a language → don't auto-switch
     brand: null, year: null, model: null, service: null, flow: null, misses: 0,
   };
@@ -537,14 +537,17 @@
       b.setAttribute('aria-pressed', on);
     });
   };
-  const setLang = async lang => {
-    if (busy || !LANGS.includes(lang)) return;
+  const setLang = async (lang, { fromSite = false } = {}) => {
+    if (!LANGS.includes(lang)) return;
     const changed = lang !== ctx.lang;
     ctx.lang = lang;
     ctx.locked = true;
-    storage.set('km-chat-lang', lang);
+    storage.set('km-lang', lang);
     applyUi();
     if (!changed) return;
+    if (!fromSite) dispatchEvent(new CustomEvent('km:lang', { detail: { lang, from: 'chat' } }));
+    if (busy) { setChips(currentChips); return; }
+    if (!body.children.length) return; // chat not opened yet — the greeting will use the new language
     if (body.children.length <= 1) { // only the greeting so far → just re-greet in the new language
       body.innerHTML = '';
       add('bot', UI.greet[lang]);
@@ -560,6 +563,8 @@
     const b = e.target.closest('button[data-lang]');
     if (b) setLang(b.dataset.lang);
   });
+  // the visitor switched the site language in the header → follow it
+  addEventListener('km:lang', e => { if (e.detail.from === 'site') setLang(e.detail.lang, { fromSite: true }); });
 
   /* ================= Booking flow ================= */
   const F = {
@@ -632,7 +637,7 @@
       if (pageForm.vehicle) pageForm.vehicle.value = d.vehicle || '';
       if (pageForm.message) pageForm.message.value = `[via chat] ${d.location || ''}`.trim();
       const sel = document.getElementById('serviceSelect');
-      const opt = sel && [...sel.options].find(o => o.text === d.service);
+      const opt = sel && [...sel.options].find(o => o.value === d.service);
       if (opt) sel.value = opt.value;
     }
     try {

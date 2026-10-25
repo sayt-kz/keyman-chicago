@@ -11,6 +11,8 @@
   <link rel="icon" href="https://keymanchicago.com/wp-content/uploads/2026/01/logo-logo-KM.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.youtube-nocookie.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">
@@ -35,20 +37,34 @@
       <span>KEY<b>MAN</b></span>
     </a>
     <nav class="nav__links" id="navLinks">
-      <a href="#services">Services</a>
-      <a href="#work">Our work</a>
-      <a href="#how">How it works</a>
-      <a href="#why">Why us</a>
-      <a href="#academy">Academy</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contacts">Contacts</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#work" data-i18n="nav.work">Our work</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#why" data-i18n="nav.why">Why us</a>
+      <a href="#academy" data-i18n="nav.academy">Academy</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contacts" data-i18n="nav.contacts">Contacts</a>
     </nav>
     <div class="nav__actions">
+      <!-- site language switcher -->
+      <div class="lang" id="langSwitch">
+        <button class="lang__btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+          <span class="lang__code">EN</span>
+          <i aria-hidden="true">▾</i>
+        </button>
+        <ul class="lang__menu" role="listbox">
+          <li><button type="button" role="option" data-lang="en"><b>EN</b> English</button></li>
+          <li><button type="button" role="option" data-lang="ru"><b>RU</b> Русский</button></li>
+          <li><button type="button" role="option" data-lang="uk"><b>UA</b> Українська</button></li>
+          <li><button type="button" role="option" data-lang="es"><b>ES</b> Español</button></li>
+        </ul>
+      </div>
       <a class="nav__phone" href="tel:+12242533252">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
         224-253-3252
       </a>
-      <a href="tel:+12242533252" class="btn btn--primary btn--sm">Call now</a>
+      <a href="tel:+12242533252" class="btn btn--primary btn--sm" data-i18n="nav.call">Call now</a>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </div>
@@ -56,33 +72,39 @@
 
 <main id="top">
 
-<!-- ============ HERO ============ -->
-<section class="hero">
+<!-- ============ HERO ============
+     Background video: a segment of a Key Man YouTube video (data-yt / data-start / data-end).
+     To use your own file instead, put hero.mp4 next to index.html and set data-mp4="hero.mp4".
+     If the video can't play, the animated canvas below stays as the background. -->
+<section class="hero" id="hero">
+  <div class="hero__video" id="heroVideo" data-yt="G3-nBMgVPDA" data-start="88" data-end="160" data-mp4="" aria-hidden="true">
+    <div id="heroPlayer"></div>
+  </div>
   <canvas id="bitting" class="hero__canvas" aria-hidden="true"></canvas>
-  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__shade" aria-hidden="true"></div>
 
   <div class="container hero__grid">
     <div class="hero__copy">
-      <div class="pill reveal"><span class="pill__dot"></span> Mobile team on the road across Chicago</div>
+      <div class="pill reveal"><span class="pill__dot"></span> <span data-i18n="hero.pill">Mobile team on the road across Chicago</span></div>
       <h1 class="reveal">
-        Need keys?<br>
-        <span class="grad">No problem.</span>
+        <span data-i18n="hero.h1a">Need keys?</span><br>
+        <span class="grad" data-i18n="hero.h1b">No problem.</span>
       </h1>
-      <p class="hero__lead reveal">Lost key, lockout or a spare smart key — we come to your home, office or roadside and program it on the spot. Response <b>from 30 minutes</b>.</p>
+      <p class="hero__lead reveal" data-i18n="hero.lead">Lost key, lockout or a spare smart key — we come to your home, office or roadside and program it on the spot. Response <b>from 30 minutes</b>.</p>
       <div class="hero__cta reveal">
         <a href="tel:+12242533252" class="btn btn--primary btn--lg">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
-          Call 224-253-3252
+          <span data-i18n="hero.call">Call 224-253-3252</span>
         </a>
         <button class="btn btn--ghost btn--lg" data-open-assistant>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6zM19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></svg>
-          Chat with us
+          <span data-i18n="hero.chat">Chat with us</span>
         </button>
       </div>
       <ul class="hero__stats reveal">
-        <li><b data-count="30">30</b><span>min response time</span></li>
-        <li><b data-count="12">12</b><span>month warranty on keys</span></li>
-        <li><b>OEM</b><span>equipment &amp; programming</span></li>
+        <li><b>30</b><span data-i18n="hero.s1">min response time</span></li>
+        <li><b>12</b><span data-i18n="hero.s2">month warranty on keys</span></li>
+        <li><b>OEM</b><span data-i18n="hero.s3">equipment &amp; programming</span></li>
       </ul>
     </div>
 
@@ -158,19 +180,19 @@
           <text x="134" y="221" text-anchor="middle" class="fob__km">KM</text>
         </g>
       </svg>
-      <div class="scene__badge scene__badge--a"><b>Smart key</b><span>programmed on site</span></div>
-      <div class="scene__badge scene__badge--b"><b>12-mo</b><span>warranty</span></div>
+      <div class="scene__badge scene__badge--a"><b data-i18n="badge.a">Smart key</b><span data-i18n="badge.as">programmed on site</span></div>
+      <div class="scene__badge scene__badge--b"><b data-i18n="badge.b">12-mo</b><span data-i18n="badge.bs">warranty</span></div>
     </div>
   </div>
 
-  <a href="#services" class="hero__scroll" aria-label="Scroll to services"><span></span></a>
+  <a href="#work" class="hero__scroll" aria-label="Scroll down"><span></span></a>
 </section>
 
 <!-- ============ BRANDS MARQUEE ============ -->
 <section class="marquee section--light" aria-label="Car brands we work with">
   <div class="container marquee__head">
-    <span class="eyebrow">Most car brands supported</span>
-    <h2 class="marquee__title">Domestic, Asian &amp; European</h2>
+    <span class="eyebrow" data-i18n="brands.eyebrow">Most car brands supported</span>
+    <h2 class="marquee__title" data-i18n="brands.title">Domestic, Asian &amp; European</h2>
   </div>
   <div class="marquee__track">
     <span>Toyota</span><span>Honda</span><span>Ford</span><span>Chevrolet</span><span>Nissan</span><span>Hyundai</span><span>Kia</span><span>Jeep</span><span>Dodge</span><span>BMW</span><span>Mercedes-Benz</span><span>Volvo</span><span>Audi</span><span>Volkswagen</span><span>Lexus</span><span>Subaru</span><span>Mazda</span><span>GMC</span>
@@ -179,16 +201,15 @@
 </section>
 
 <!-- ============ PROJECT SHOWCASE ============
-     To add your work: put files into public/gallery/ and keep the names below
-     (or change data-src). Images: .jpg/.webp. Video: .mp4 (+ a poster image).
-     A YouTube video: use data-type="youtube" data-src="VIDEO_ID".
-     Cards whose file is missing show a "coming soon" placeholder. -->
+     Real Key Man videos from YouTube Shorts. Hover a card (desktop) to preview it, click to watch.
+     Card types: data-type="youtube" data-src="VIDEO_ID" (add data-vertical for Shorts),
+     or data-type="image" / "video" with a file from public/gallery/ (see gallery/README.md). -->
 <section class="section section--light showcase" id="work">
   <div class="container">
     <div class="showcase__head reveal">
       <div>
-        <span class="eyebrow">Our work</span>
-        <h2>Project showcase</h2>
+        <span class="eyebrow" data-i18n="work.eyebrow">Our work</span>
+        <h2 data-i18n="work.title">Project showcase</h2>
       </div>
       <div class="showcase__nav">
         <button class="showcase__arrow" data-dir="-1" aria-label="Previous">←</button>
@@ -197,41 +218,49 @@
     </div>
   </div>
   <div class="showcase__track" id="showcase">
-    <button class="shot" data-type="video" data-src="gallery/video-01.mp4" data-poster="gallery/video-01.jpg" data-caption="Smart key programmed on site">
-      <img src="gallery/video-01.jpg" alt="Smart key programmed on site" loading="lazy">
-      <span class="shot__tag">Smart keys</span><span class="shot__cap">Smart key programmed on site</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="IW3F_a00IFs">
+      <img src="https://i.ytimg.com/vi/IW3F_a00IFs/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t1">Key cutting</span><span class="shot__cap" data-i18n="shot.c1">Car key copy on the spot</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/01.jpg" data-caption="Emergency lockout — opened without damage">
-      <img src="gallery/01.jpg" alt="Emergency lockout — opened without damage" loading="lazy">
-      <span class="shot__tag">Lockout</span><span class="shot__cap">Opened without damage</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="tzNoKaW7B5c">
+      <img src="https://i.ytimg.com/vi/tzNoKaW7B5c/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag">BMW</span><span class="shot__cap" data-i18n="shot.c2">Key for a BMW M6</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/02.jpg" data-caption="High-security key cutting">
-      <img src="gallery/02.jpg" alt="High-security key cutting" loading="lazy">
-      <span class="shot__tag">Duplication</span><span class="shot__cap">High-security key cutting</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="iJCqfyYE76w">
+      <img src="https://i.ytimg.com/vi/iJCqfyYE76w/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Mercedes</span><span class="shot__cap" data-i18n="shot.c3">Mercedes FSB4 key programming</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/03.jpg" data-caption="BMW key — all keys lost">
-      <img src="gallery/03.jpg" alt="BMW key — all keys lost" loading="lazy">
-      <span class="shot__tag">Lost key</span><span class="shot__cap">BMW — all keys lost</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="SOMFtzCmPA0">
+      <img src="https://i.ytimg.com/vi/SOMFtzCmPA0/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t4">Programming</span><span class="shot__cap" data-i18n="shot.c4">Key programming without the dealership</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/04.jpg" data-caption="Our mobile service van">
-      <img src="gallery/04.jpg" alt="Our mobile service van" loading="lazy">
-      <span class="shot__tag">Mobile</span><span class="shot__cap">Fully equipped van</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="5uuTS2LhuAY">
+      <img src="https://i.ytimg.com/vi/5uuTS2LhuAY/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Volvo</span><span class="shot__cap" data-i18n="shot.c5">New key for a 2016 Volvo XC90</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/05.jpg" data-caption="Push-to-start fob replacement">
-      <img src="gallery/05.jpg" alt="Push-to-start fob replacement" loading="lazy">
-      <span class="shot__tag">Remotes</span><span class="shot__cap">Push-to-start fob</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="r9HkQwc7TVY">
+      <img src="https://i.ytimg.com/vi/r9HkQwc7TVY/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t6">Smart keys</span><span class="shot__cap" data-i18n="shot.c6">Extra key for a luxury car</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/06.jpg" data-caption="Key Man Academy — hands-on training">
-      <img src="gallery/06.jpg" alt="Key Man Academy — hands-on training" loading="lazy">
-      <span class="shot__tag">Academy</span><span class="shot__cap">Hands-on training</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="1PhY0HNlJJQ">
+      <img src="https://i.ytimg.com/vi/1PhY0HNlJJQ/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Ford · Lincoln</span><span class="shot__cap" data-i18n="shot.c7">Keys for any Ford and Lincoln</span>
     </button>
-    <button class="shot" data-type="image" data-src="gallery/07.jpg" data-caption="Dealer-level programming equipment">
-      <img src="gallery/07.jpg" alt="Dealer-level programming equipment" loading="lazy">
-      <span class="shot__tag">OEM</span><span class="shot__cap">Programming equipment</span>
+    <button class="shot" data-type="youtube" data-vertical data-src="QKoQ4QfUx1U">
+      <img src="https://i.ytimg.com/vi/QKoQ4QfUx1U/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t8">Mobile</span><span class="shot__cap" data-i18n="shot.c8">Car keys at your doorstep</span>
+    </button>
+    <button class="shot" data-type="youtube" data-vertical data-src="2_09xapffOA">
+      <img src="https://i.ytimg.com/vi/2_09xapffOA/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag" data-i18n="shot.t9">On the job</span><span class="shot__cap" data-i18n="shot.c9">Work never stops</span>
+    </button>
+    <button class="shot" data-type="youtube" data-vertical data-src="P7zeur6Q4rY">
+      <img src="https://i.ytimg.com/vi/P7zeur6Q4rY/oar2.jpg" alt="" loading="lazy">
+      <span class="shot__tag">Key Man</span><span class="shot__cap" data-i18n="shot.c10">Need keys? No problem!</span>
     </button>
   </div>
   <div class="container center reveal">
-    <a class="btn btn--ghost showcase__more" href="https://www.youtube.com/@KeyManChicago" target="_blank" rel="noopener">More on YouTube →</a>
+    <a class="btn btn--ghost showcase__more" href="https://www.youtube.com/@KeyManChicago/shorts" target="_blank" rel="noopener" data-i18n="work.more">More on YouTube →</a>
   </div>
 </section>
 
@@ -250,47 +279,47 @@
 <section class="section" id="services">
   <div class="container">
     <div class="section__head reveal">
-      <span class="eyebrow">Services</span>
-      <h2>Everything for your car keys — <span class="grad">on the spot</span></h2>
-      <p>Our mobile team handles smart keys, fobs and high-security programming with speed and precision.</p>
+      <span class="eyebrow" data-i18n="nav.services">Services</span>
+      <h2><span data-i18n="sv.h2a">Everything for your car keys —</span> <span class="grad" data-i18n="sv.h2b">on the spot</span></h2>
+      <p data-i18n="sv.p">Our mobile team handles smart keys, fobs and high-security programming with speed and precision.</p>
     </div>
 
     <div class="cards">
       <article class="card reveal">
         <div class="card__icon"><svg viewBox="0 0 24 24"><circle cx="7.5" cy="12" r="4.5"/><path d="M12 12h10M18 12v3M21 12v2"/></svg></div>
-        <h3>Car Key Duplication</h3>
-        <p>Precise cutting of standard and high-security keys. A spare made in minutes, not days.</p>
-        <button class="btn btn--primary btn--sm card__link" data-service="Car Key Duplication">Request a quote</button>
+        <h3 data-i18n="sv.1h">Car Key Duplication</h3>
+        <p data-i18n="sv.1p">Precise cutting of standard and high-security keys. A spare made in minutes, not days.</p>
+        <button class="btn btn--primary btn--sm card__link" data-service="Car Key Duplication" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
         <div class="card__icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="5"/><circle cx="12" cy="8" r="1.6"/><circle cx="12" cy="13" r="1.6"/><path d="M3 9a8 8 0 0 0 0 6M21 9a8 8 0 0 1 0 6"/></svg></div>
-        <h3>Smart Keys &amp; Remotes</h3>
-        <p>Proximity keys, push-to-start fobs and remotes — supplied, cut and programmed to your car.</p>
-        <button class="btn btn--primary btn--sm card__link" data-service="Smart Keys & Remotes">Request a quote</button>
+        <h3 data-i18n="sv.2h">Smart Keys &amp; Remotes</h3>
+        <p data-i18n="sv.2p">Proximity keys, push-to-start fobs and remotes — supplied, cut and programmed to your car.</p>
+        <button class="btn btn--primary btn--sm card__link" data-service="Smart Keys & Remotes" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
         <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
-        <h3>OEM Equipment</h3>
-        <p>Professional diagnostic and programming tools, the same class dealerships use.</p>
-        <button class="btn btn--primary btn--sm card__link" data-service="OEM equipment">Request a quote</button>
+        <h3 data-i18n="sv.3h">OEM Equipment</h3>
+        <p data-i18n="sv.3p">Professional diagnostic and programming tools, the same class dealerships use.</p>
+        <button class="btn btn--primary btn--sm card__link" data-service="OEM equipment" data-i18n="sv.cta">Request a quote</button>
       </article>
-      <article class="card card--hot reveal">
+      <article class="card card--hot reveal" data-badge="Emergency" data-i18n-attr="data-badge:sv.badge">
         <div class="card__icon"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 7.5-2"/><circle cx="12" cy="15.5" r="1.6"/></svg></div>
-        <h3>Emergency Lockouts</h3>
-        <p>Keys locked inside? We open your car without damage — home, office or roadside.</p>
-        <button class="btn btn--primary btn--sm card__link" data-service="Emergency Lockout">Request a quote</button>
+        <h3 data-i18n="sv.4h">Emergency Lockouts</h3>
+        <p data-i18n="sv.4p">Keys locked inside? We open your car without damage — home, office or roadside.</p>
+        <button class="btn btn--primary btn--sm card__link" data-service="Emergency Lockout" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
         <div class="card__icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5M8.5 11h5M11 8.5v5"/></svg></div>
-        <h3>Lost Key Replacement</h3>
-        <p>No key at all? We make and program a new one from scratch, even when all keys are lost.</p>
-        <button class="btn btn--primary btn--sm card__link" data-service="Lost Key Replacement">Request a quote</button>
+        <h3 data-i18n="sv.5h">Lost Key Replacement</h3>
+        <p data-i18n="sv.5p">No key at all? We make and program a new one from scratch, even when all keys are lost.</p>
+        <button class="btn btn--primary btn--sm card__link" data-service="Lost Key Replacement" data-i18n="sv.cta">Request a quote</button>
       </article>
       <article class="card reveal">
         <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M3 15l2-6c.5-1.4 1.6-2 3-2h8c1.4 0 2.5.6 3 2l2 6v4h-3M6 19H3v-4M17 19H7"/><circle cx="7.5" cy="19" r="2"/><circle cx="16.5" cy="19" r="2"/></svg></div>
-        <h3>Most Car Brands</h3>
-        <p>Domestic, Asian and European — including BMW, Mercedes-Benz and Volvo.</p>
-        <button class="btn btn--primary btn--sm card__link" data-service="Other / not sure">Request a quote</button>
+        <h3 data-i18n="sv.6h">Most Car Brands</h3>
+        <p data-i18n="sv.6p">Domestic, Asian and European — including BMW, Mercedes-Benz and Volvo.</p>
+        <button class="btn btn--primary btn--sm card__link" data-service="Other / not sure" data-i18n="sv.cta">Request a quote</button>
       </article>
     </div>
   </div>
@@ -300,24 +329,24 @@
 <section class="section section--light" id="how">
   <div class="container">
     <div class="section__head reveal">
-      <span class="eyebrow">How it works</span>
-      <h2>Back on the road in <span class="grad">3 steps</span></h2>
+      <span class="eyebrow" data-i18n="nav.how">How it works</span>
+      <h2><span data-i18n="how.h2a">Back on the road in</span> <span class="grad" data-i18n="how.h2b">3 steps</span></h2>
     </div>
     <ol class="steps">
       <li class="step reveal">
         <span class="step__n">01</span>
-        <h3>Call or message</h3>
-        <p>Tell us your car's make, model, year and where you are. Get a price upfront.</p>
+        <h3 data-i18n="how.1h">Call or message</h3>
+        <p data-i18n="how.1p">Tell us your car's make, model, year and where you are. Get a price upfront.</p>
       </li>
       <li class="step reveal">
         <span class="step__n">02</span>
-        <h3>We drive to you</h3>
-        <p>A fully equipped mobile van arrives — typically from 30 minutes.</p>
+        <h3 data-i18n="how.2h">We drive to you</h3>
+        <p data-i18n="how.2p">A fully equipped mobile van arrives — typically from 30 minutes.</p>
       </li>
       <li class="step reveal">
         <span class="step__n">03</span>
-        <h3>Key ready on site</h3>
-        <p>We cut, program and test the key with you. Covered by a 12-month warranty.</p>
+        <h3 data-i18n="how.3h">Key ready on site</h3>
+        <p data-i18n="how.3p">We cut, program and test the key with you. Covered by a 12-month warranty.</p>
       </li>
     </ol>
   </div>
@@ -327,18 +356,18 @@
 <section class="section section--grey" id="why">
   <div class="container why">
     <div class="why__copy reveal">
-      <span class="eyebrow">Why Key Man</span>
-      <h2>Fast. Fair. <span class="grad">Guaranteed.</span></h2>
-      <p>Lost your key? Locked out? Need a spare? We've got you covered. Trusted by drivers, dealerships and businesses across Chicago.</p>
-      <a href="tel:+12242533252" class="btn btn--primary">Call now</a>
+      <span class="eyebrow" data-i18n="why.eyebrow">Why Key Man</span>
+      <h2><span data-i18n="why.h2a">Fast. Fair.</span> <span class="grad" data-i18n="why.h2b">Guaranteed.</span></h2>
+      <p data-i18n="why.p">Lost your key? Locked out? Need a spare? We've got you covered. Trusted by drivers, dealerships and businesses across Chicago.</p>
+      <a href="tel:+12242533252" class="btn btn--primary" data-i18n="nav.call">Call now</a>
     </div>
     <div class="why__grid">
-      <div class="feat reveal"><b>30<small>min</small></b><span>Fast response — from 30 minutes</span></div>
-      <div class="feat reveal"><b>$</b><span>Best prices in Chicago — no dealership markup</span></div>
-      <div class="feat reveal"><b>12<small>mo</small></b><span>Warranty on all keys</span></div>
+      <div class="feat reveal"><b>30<small data-i18n="unit.min">min</small></b><span data-i18n="why.1">Fast response — from 30 minutes</span></div>
+      <div class="feat reveal"><b>$</b><span data-i18n="why.2">Best prices in Chicago — no dealership markup</span></div>
+      <div class="feat reveal"><b>12<small data-i18n="unit.mo">mo</small></b><span data-i18n="why.3">Warranty on all keys</span></div>
       <div class="feat reveal"><b>
         <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-      </b><span>Mobile service — home, office, roadside</span></div>
+      </b><span data-i18n="why.4">Mobile service — home, office, roadside</span></div>
     </div>
   </div>
 </section>
@@ -348,30 +377,30 @@
   <div class="container">
     <div class="section__head reveal">
       <span class="eyebrow">Key Man Academy</span>
-      <h2>Become a pro <span class="grad">auto locksmith</span></h2>
-      <p>Stop working for someone else and start building your own future. Hands-on training: cut, program and repair car keys, and open locks like a pro — then start your own business or get hired right away.</p>
+      <h2><span data-i18n="ac.h2a">Become a pro</span> <span class="grad" data-i18n="ac.h2b">auto locksmith</span></h2>
+      <p data-i18n="ac.p">Stop working for someone else and start building your own future. Hands-on training: cut, program and repair car keys, and open locks like a pro — then start your own business or get hired right away.</p>
     </div>
     <div class="tiers">
       <div class="tier reveal">
-        <span class="tier__lvl">Level 1</span>
+        <span class="tier__lvl" data-i18n="ac.l1">Level 1</span>
         <h3>Start Pack</h3>
-        <p>Key cutting, duplication and basic transponders.</p>
-        <ul><li>Key cutting machines</li><li>Duplication workflow</li><li>Basic transponders</li></ul>
+        <p data-i18n="ac.1p">Key cutting, duplication and basic transponders.</p>
+        <ul><li data-i18n="ac.1a">Key cutting machines</li><li data-i18n="ac.1b">Duplication workflow</li><li data-i18n="ac.1c">Basic transponders</li></ul>
       </div>
       <div class="tier tier--feat reveal">
-        <span class="tier__lvl">Level 2 · Popular</span>
+        <span class="tier__lvl" data-i18n="ac.l2">Level 2 · Popular</span>
         <h3>PRO Master</h3>
-        <p>Immobilizers, key cloning and working with dealer software.</p>
-        <ul><li>Immobilizer systems</li><li>Key cloning</li><li>Dealer software</li></ul>
+        <p data-i18n="ac.2p">Immobilizers, key cloning and working with dealer software.</p>
+        <ul><li data-i18n="ac.2a">Immobilizer systems</li><li data-i18n="ac.2b">Key cloning</li><li data-i18n="ac.2c">Dealer software</li></ul>
       </div>
       <div class="tier reveal">
-        <span class="tier__lvl">Level 3</span>
+        <span class="tier__lvl" data-i18n="ac.l3">Level 3</span>
         <h3>True Expert</h3>
-        <p>BMW, Mercedes, Volvo, advanced security systems and high-end equipment.</p>
-        <ul><li>European premium brands</li><li>Advanced security</li><li>High-end equipment</li></ul>
+        <p data-i18n="ac.3p">BMW, Mercedes, Volvo, advanced security systems and high-end equipment.</p>
+        <ul><li data-i18n="ac.3a">European premium brands</li><li data-i18n="ac.3b">Advanced security</li><li data-i18n="ac.3c">High-end equipment</li></ul>
       </div>
     </div>
-    <div class="center reveal"><a href="#contacts" class="btn btn--primary" data-service-link="Key Man Academy">Get more info</a></div>
+    <div class="center reveal"><a href="#contacts" class="btn btn--primary" data-service-link="Key Man Academy" data-i18n="ac.cta">Get more info</a></div>
   </div>
 </section>
 
@@ -380,7 +409,7 @@
   <div class="container social">
     <a class="social__card reveal" href="https://www.youtube.com/@KeyManChicago" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.6 3.1z"/></svg>
-      <div><b>YouTube &amp; Shorts</b><span>Watch real jobs and key programming</span></div><i>→</i>
+      <div><b>YouTube &amp; Shorts</b><span data-i18n="so.yt">Watch real jobs and key programming</span></div><i>→</i>
     </a>
     <a class="social__card reveal" href="https://www.instagram.com/keyman.chicago" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 2c-2.7 0-3.1 0-4.1.1C3.8 2.3 2.3 3.8 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.2 4.1 1.7 5.6 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c4.1-.2 5.6-1.7 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.2-4.1-1.7-5.6-5.8-5.8C15.1 2 14.7 2 12 2z"/></svg>
@@ -394,15 +423,15 @@
   <div class="container faq">
     <div class="section__head reveal">
       <span class="eyebrow">FAQ</span>
-      <h2>Questions drivers ask</h2>
+      <h2 data-i18n="faq.h2">Questions drivers ask</h2>
     </div>
     <div class="faq__list">
-      <details class="reveal"><summary>How fast can you get to me?</summary><p>Response time starts from 30 minutes depending on your location in the Chicago area and traffic. Call us and we'll give you a real ETA.</p></details>
-      <details class="reveal"><summary>Can you make a key if I lost all my keys?</summary><p>Yes. We can create and program a brand-new key for most vehicles even when no working key is available.</p></details>
-      <details class="reveal"><summary>Is it cheaper than the dealership?</summary><p>Usually, yes — and you don't need to tow your car. We come to you with OEM-grade equipment.</p></details>
-      <details class="reveal"><summary>Will you damage my car during a lockout?</summary><p>No. We use professional tools and techniques designed to open vehicles without damage.</p></details>
-      <details class="reveal"><summary>Is there a warranty?</summary><p>Every key we make is covered by a 12-month warranty.</p></details>
-      <details class="reveal"><summary>What info do you need for a quote?</summary><p>Make, model and year of the vehicle, the type of key (regular, remote, smart/push-to-start), and your location.</p></details>
+      <details class="reveal"><summary data-i18n="faq.1q">How fast can you get to me?</summary><p data-i18n="faq.1a">Response time starts from 30 minutes depending on your location in the Chicago area and traffic. Call us and we'll give you a real ETA.</p></details>
+      <details class="reveal"><summary data-i18n="faq.2q">Can you make a key if I lost all my keys?</summary><p data-i18n="faq.2a">Yes. We can create and program a brand-new key for most vehicles even when no working key is available.</p></details>
+      <details class="reveal"><summary data-i18n="faq.3q">Is it cheaper than the dealership?</summary><p data-i18n="faq.3a">Usually, yes — and you don't need to tow your car. We come to you with OEM-grade equipment.</p></details>
+      <details class="reveal"><summary data-i18n="faq.4q">Will you damage my car during a lockout?</summary><p data-i18n="faq.4a">No. We use professional tools and techniques designed to open vehicles without damage.</p></details>
+      <details class="reveal"><summary data-i18n="faq.5q">Is there a warranty?</summary><p data-i18n="faq.5a">Every key we make is covered by a 12-month warranty.</p></details>
+      <details class="reveal"><summary data-i18n="faq.6q">What info do you need for a quote?</summary><p data-i18n="faq.6a">Make, model and year of the vehicle, the type of key (regular, remote, smart/push-to-start), and your location.</p></details>
     </div>
   </div>
 </section>
@@ -411,40 +440,40 @@
 <section class="section section--grey" id="contacts">
   <div class="container contact">
     <div class="contact__info reveal">
-      <span class="eyebrow">Contacts</span>
-      <h2>Ask a question or <span class="grad">order a key</span></h2>
-      <p>Leave your details and we'll call you back — or just call us now.</p>
+      <span class="eyebrow" data-i18n="nav.contacts">Contacts</span>
+      <h2><span data-i18n="ct.h2a">Ask a question or</span> <span class="grad" data-i18n="ct.h2b">order a key</span></h2>
+      <p data-i18n="ct.p">Leave your details and we'll call you back — or just call us now.</p>
       <a class="contact__phone" href="tel:+12242533252">224-253-3252</a>
       <ul class="contact__list">
-        <li>📍 Mobile service across Chicago</li>
-        <li>🚐 Home · Office · Roadside</li>
-        <li>🔑 12-month warranty on all keys</li>
+        <li data-i18n="ct.l1">📍 Mobile service across Chicago</li>
+        <li data-i18n="ct.l2">🚐 Home · Office · Roadside</li>
+        <li data-i18n="ct.l3">🔑 12-month warranty on all keys</li>
       </ul>
     </div>
-    <form class="form reveal" id="leadForm" novalidate>
+    <form class="form reveal" id="leadForm" novalidate data-title="Get a free quote" data-i18n-attr="data-title:fm.title">
       <div class="form__row">
-        <label>Name *<input name="name" required autocomplete="name" placeholder="John"></label>
-        <label>Phone *<input name="phone" type="tel" required autocomplete="tel" placeholder="(312) 555-0123"></label>
+        <label><span data-i18n="fm.name">Name *</span><input name="name" required autocomplete="name" placeholder="John" data-i18n-attr="placeholder:fm.namePh"></label>
+        <label><span data-i18n="fm.phone">Phone *</span><input name="phone" type="tel" required autocomplete="tel" placeholder="(312) 555-0123"></label>
       </div>
       <label>Email<input name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
       <div class="form__row">
-        <label>Service
+        <label><span data-i18n="fm.service">Service</span>
           <select name="service" id="serviceSelect">
-            <option>Car Key Duplication</option>
-            <option>Smart Keys &amp; Remotes</option>
-            <option>OEM equipment</option>
-            <option>Emergency Lockout</option>
-            <option>Lost Key Replacement</option>
-            <option>Key Man Academy</option>
-            <option>Other / not sure</option>
+            <option value="Car Key Duplication" data-i18n="sv.1h">Car Key Duplication</option>
+            <option value="Smart Keys &amp; Remotes" data-i18n="sv.2h">Smart Keys &amp; Remotes</option>
+            <option value="OEM equipment" data-i18n="sv.3h">OEM equipment</option>
+            <option value="Emergency Lockout" data-i18n="sv.4h">Emergency Lockout</option>
+            <option value="Lost Key Replacement" data-i18n="sv.5h">Lost Key Replacement</option>
+            <option value="Key Man Academy">Key Man Academy</option>
+            <option value="Other / not sure" data-i18n="fm.other">Other / not sure</option>
           </select>
         </label>
-        <label>Vehicle<input name="vehicle" placeholder="2019 Toyota Camry"></label>
+        <label><span data-i18n="fm.vehicle">Vehicle</span><input name="vehicle" placeholder="2019 Toyota Camry"></label>
       </div>
-      <label>Message<textarea name="message" rows="3" placeholder="What happened? Where are you?"></textarea></label>
-      <button class="btn btn--primary btn--block" type="submit">Send request</button>
-      <p class="form__note">By sending, you agree to our <a href="https://keymanchicago.com/privacy">Personal Data Processing Policy</a>.</p>
-      <div class="form__ok" hidden>✅ Thanks! We'll call you back shortly.</div>
+      <label><span data-i18n="fm.message">Message</span><textarea name="message" rows="3" placeholder="What happened? Where are you?" data-i18n-attr="placeholder:fm.messagePh"></textarea></label>
+      <button class="btn btn--primary btn--block" type="submit" data-i18n="fm.send">Send request</button>
+      <p class="form__note" data-i18n="fm.note">By sending, you agree to our <a href="https://keymanchicago.com/privacy">Personal Data Processing Policy</a>.</p>
+      <div class="form__ok" hidden data-i18n="fm.ok">✅ Thanks! We'll call you back shortly.</div>
     </form>
   </div>
 </section>
@@ -454,9 +483,9 @@
 <footer class="footer">
   <div class="container footer__inner">
     <a href="#top" class="logo"><span>KEY<b>MAN</b></span></a>
-    <p>© 2026 Key Man Chicago. Copying of materials is prohibited.</p>
+    <p data-i18n="ft.copy">© 2026 Key Man Chicago. Copying of materials is prohibited.</p>
     <div class="footer__links">
-      <a href="https://keymanchicago.com/privacy">Privacy policy</a>
+      <a href="https://keymanchicago.com/privacy" data-i18n="ft.privacy">Privacy policy</a>
       <a href="https://www.youtube.com/@KeyManChicago" target="_blank" rel="noopener">YouTube</a>
       <a href="https://www.instagram.com/keyman.chicago" target="_blank" rel="noopener">Instagram</a>
     </div>
@@ -465,11 +494,11 @@
 
 <!-- Mobile call bar -->
 <div class="callbar">
-  <a href="tel:+12242533252" class="btn btn--primary">📞 Call now</a>
-  <button class="btn btn--ghost" data-open-assistant>💬 Chat</button>
+  <a href="tel:+12242533252" class="btn btn--primary">📞 <span data-i18n="nav.call">Call now</span></a>
+  <button class="btn btn--ghost" data-open-assistant>💬 <span data-i18n="cb.chat">Chat</span></button>
 </div>
 
-<!-- ============ AI ASSISTANT ============ -->
+<!-- ============ CHAT BOT ============ -->
 <button class="ai-fab" id="aiFab" aria-label="Open chat assistant" data-open-assistant>
   <span class="ai-fab__icon">KM</span><span class="ai-fab__label">Key Man Bot</span>
 </button>
@@ -487,18 +516,14 @@
     </div>
   </header>
   <div class="ai__body" id="aiBody"></div>
-  <div class="ai__chips" id="aiChips">
-    <button>I'm locked out 🚨</button>
-    <button>I lost my only key</button>
-    <button>How much is a smart key?</button>
-    <button>Tell me about the Academy</button>
-  </div>
+  <div class="ai__chips" id="aiChips"></div>
   <form class="ai__form" id="aiForm">
     <input id="aiInput" autocomplete="off" placeholder="Ask anything about car keys…" maxlength="800">
     <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4l3 8zm3-8h8"/></svg></button>
   </form>
 </section>
 
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 <script src="gallery.js"></script>
 <script src="assistant.js"></script>
