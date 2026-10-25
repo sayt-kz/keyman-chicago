@@ -74,7 +74,7 @@
   });
 
   /* ---------- Scene parallax ---------- */
-  const scene = document.querySelector('.scene');
+  const scene = document.querySelector('.vanstage');
   if (scene && !reduceMotion && matchMedia('(pointer: fine)').matches) {
     addEventListener('pointermove', e => {
       const x = (e.clientX / innerWidth - .5) * 2, y = (e.clientY / innerHeight - .5) * 2;
