@@ -337,4 +337,14 @@
   resize();
   if (reduceMotion) introResolve();
   requestAnimationFrame(draw);
+  /* ---------- Service area map: Google Maps labels in the site language ---------- */
+  const mapFrame = document.getElementById('mapFrame');
+  if (mapFrame) {
+    const setMapLang = lang => {
+      const src = mapFrame.src.replace(/hl=w+/, 'hl=' + (lang || 'ru'));
+      if (src !== mapFrame.src) mapFrame.src = src;
+    };
+    setMapLang(window.kmLang?.get());
+    addEventListener('km:lang', e => setMapLang(e.detail.lang));
+  }
 })();
