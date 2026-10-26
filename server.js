@@ -15,11 +15,9 @@ const TYPES = {
   ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon", ".mp4": "video/mp4",
 };
 
-async function runApi(req, res, pathname) {
-  const file = path.join(ROOT, pathname + ".js");
-  if (!file.startsWith(path.join(ROOT, "api"))) { res.writeHead(404); return res.end(); }
-  try { await stat(file); } catch { res.writeHead(404); return res.end("No such API"); }
-  const mod = await import(pathToFileURL(file).href);
+// all /api/* requests go through the same router Vercel uses (api/index.js → routes/)
+async function runApi(req, res) {
+  const mod = await import(pathToFileURL(path.join(ROOT, "api", "index.js")).href);
   return mod.default(req, res);
 }
 
@@ -43,6 +41,6 @@ async function serveStatic(req, res, pathname) {
 http.createServer((req, res) => {
   const { pathname } = new URL(req.url, "http://x");
   const p = decodeURIComponent(pathname);
-  if (p.startsWith("/api/")) return runApi(req, res, p.replace(/\/$/, ""));
+  if (p.startsWith("/api/")) return runApi(req, res);
   return serveStatic(req, res, p);
 }).listen(PORT, () => console.log(`Key Man site: http://localhost:${PORT}  ·  admin: http://localhost:${PORT}/admin/`));

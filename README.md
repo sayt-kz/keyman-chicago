@@ -10,7 +10,8 @@ keyman/
     academy.js, academy.css   scripts and styles of the three pages above
     img/               van photo, logo, photos from the Key Man shoot (resized for web)
     admin/             admin panel UI  →  /admin/
-  api/                 serverless functions (Vercel)
+  api/index.js         the single Vercel function: routes every /api/* request (vercel.json rewrite)
+  routes/              API handlers, path = /api/<file name>
     lead.js            POST  /api/lead            requests from the form, chat bot and quick-request tab
     content.js         GET   /api/content         texts + gallery edited in the admin panel
     photo.js           GET   /api/photo?p=        photos from the private Blob store
