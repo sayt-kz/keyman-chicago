@@ -180,6 +180,83 @@
     'ai.l.ok': { en: 'Thank you! We will call you back shortly.', ru: 'Спасибо! Скоро перезвоним.', uk: 'Дякуємо! Незабаром передзвонимо.' },
     'ai.l.err': { en: 'Please enter a phone number, describe what you need and tick the consent box.', ru: 'Укажите телефон, опишите задачу и отметьте согласие.', uk: 'Вкажіть телефон, опишіть завдання й позначте згоду.' },
     'cb.chat': { en: 'Chat', ru: 'Чат', uk: 'Чат', es: 'Chat' },
+
+    /* ---- Academy pages: course catalog, course page, student account ---- */
+    'nav.home': { en: 'Home', ru: 'Главная', uk: 'Головна' },
+    'nav.courses': { en: 'Courses', ru: 'Курсы', uk: 'Курси' },
+    'nav.cabinet': { en: 'My account', ru: 'Кабинет', uk: 'Кабінет' },
+    'ac.courses': { en: 'Online video courses', ru: 'Онлайн-видеокурсы', uk: 'Онлайн-відеокурси' },
+    'acd.title': { en: 'Key Man Academy — online courses for auto locksmiths', ru: 'Key Man Academy — онлайн-курсы автослесаря по ключам', uk: 'Key Man Academy — онлайн-курси автослюсаря по ключах' },
+    'acd.eyebrow': { en: 'Online training', ru: 'Онлайн-обучение', uk: 'Онлайн-навчання' },
+    'acd.h1a': { en: 'Video courses', ru: 'Видеокурсы', uk: 'Відеокурси' },
+    'acd.p': { en: 'Learn from working locksmiths in Chicago at your own pace: video lessons on cutting, programming and repairing car keys. Lifetime access in your personal account.', ru: 'Учитесь у практиков из Чикаго в своём темпе: видеоуроки по нарезке, программированию и ремонту автоключей. Доступ навсегда — в личном кабинете.', uk: 'Навчайтеся у практиків із Чикаго у своєму темпі: відеоуроки з нарізання, програмування та ремонту автоключів. Доступ назавжди — в особистому кабінеті.' },
+    'acd.list': { en: 'All courses', ru: 'Все курсы', uk: 'Усі курси' },
+    'acd.empty': { en: 'Courses are coming soon. Leave a request and we will tell you when they start.', ru: 'Курсы скоро появятся. Оставьте заявку — сообщим о старте.', uk: 'Курси незабаром зʼявляться. Залиште заявку — повідомимо про старт.' },
+    'acd.emptyCta': { en: 'Leave a request', ru: 'Оставить заявку', uk: 'Залишити заявку' },
+    'acd.lessonsN': { en: 'Lessons: {n}', ru: 'Уроков: {n}', uk: 'Уроків: {n}' },
+    'acd.free': { en: 'Free', ru: 'Бесплатно', uk: 'Безкоштовно' },
+    'acd.more': { en: 'View course', ru: 'Подробнее', uk: 'Детальніше' },
+    'acd.owned': { en: 'In your account', ru: 'Уже в кабинете', uk: 'Вже в кабінеті' },
+    'acd.howh': { en: 'How it works', ru: 'Как это работает', uk: 'Як це працює' },
+    'acd.how1': { en: 'Sign up', ru: 'Регистрация', uk: 'Реєстрація' },
+    'acd.how1p': { en: 'Create an account in a minute — all you need is an email.', ru: 'Создайте аккаунт за минуту — нужен только email.', uk: 'Створіть акаунт за хвилину — потрібен лише email.' },
+    'acd.how2': { en: 'Pay', ru: 'Оплата', uk: 'Оплата' },
+    'acd.how2p': { en: 'Secure card payment through Stripe.', ru: 'Безопасная оплата картой через Stripe.', uk: 'Безпечна оплата карткою через Stripe.' },
+    'acd.how3': { en: 'Learn', ru: 'Учёба', uk: 'Навчання' },
+    'acd.how3p': { en: 'The course opens in your account right away. Watch on any device.', ru: 'Курс сразу открывается в личном кабинете. Смотрите с любого устройства.', uk: 'Курс одразу відкривається в особистому кабінеті. Дивіться з будь-якого пристрою.' },
+
+    'crs.back': { en: '← All courses', ru: '← Все курсы', uk: '← Усі курси' },
+    'crs.buy': { en: 'Buy course', ru: 'Купить курс', uk: 'Купити курс' },
+    'crs.getFree': { en: 'Get it free', ru: 'Получить бесплатно', uk: 'Отримати безкоштовно' },
+    'crs.watch': { en: 'Watch lessons', ru: 'Смотреть уроки', uk: 'Дивитися уроки' },
+    'crs.loginToBuy': { en: 'Sign in or create an account to buy the course.', ru: 'Войдите или зарегистрируйтесь, чтобы купить курс.', uk: 'Увійдіть або зареєструйтеся, щоб купити курс.' },
+    'crs.program': { en: 'Course program', ru: 'Программа курса', uk: 'Програма курсу' },
+    'crs.preview': { en: 'Free preview', ru: 'Бесплатно', uk: 'Безкоштовно' },
+    'crs.locked': { en: 'This lesson opens after you buy the course.', ru: 'Урок откроется после покупки курса.', uk: 'Урок відкриється після покупки курсу.' },
+    'crs.noVideo': { en: 'The video for this lesson is coming soon.', ru: 'Видео к этому уроку скоро появится.', uk: 'Відео до цього уроку незабаром зʼявиться.' },
+    'crs.payOff': { en: 'Online payment is not switched on yet. Call us to buy the course: 224-253-3252', ru: 'Онлайн-оплата пока не подключена. Позвоните нам, чтобы купить курс: 224-253-3252', uk: 'Онлайн-оплату ще не підключено. Зателефонуйте нам, щоб купити курс: 224-253-3252' },
+    'crs.notFound': { en: 'Course not found.', ru: 'Курс не найден.', uk: 'Курс не знайдено.' },
+    'crs.access': { en: 'Lifetime access · any device', ru: 'Доступ навсегда · с любого устройства', uk: 'Доступ назавжди · з будь-якого пристрою' },
+    'crs.pick': { en: 'Choose a lesson from the list', ru: 'Выберите урок из списка', uk: 'Оберіть урок зі списку' },
+    'crs.redirect': { en: 'Opening the payment page…', ru: 'Переходим к оплате…', uk: 'Переходимо до оплати…' },
+
+    'acc.title': { en: 'My account — Key Man Academy', ru: 'Личный кабинет — Key Man Academy', uk: 'Особистий кабінет — Key Man Academy' },
+    'acc.h1': { en: 'My account', ru: 'Личный кабинет', uk: 'Особистий кабінет' },
+    'acc.intro': { en: 'Your courses, progress and profile in one place.', ru: 'Ваши курсы и профиль — в одном месте.', uk: 'Ваші курси та профіль — в одному місці.' },
+    'acc.login': { en: 'Sign in', ru: 'Вход', uk: 'Вхід' },
+    'acc.register': { en: 'Create account', ru: 'Регистрация', uk: 'Реєстрація' },
+    'acc.email': { en: 'Email', ru: 'Email', uk: 'Email' },
+    'acc.password': { en: 'Password', ru: 'Пароль', uk: 'Пароль' },
+    'acc.name': { en: 'Name', ru: 'Имя', uk: 'Імʼя' },
+    'acc.phone': { en: 'Phone (optional)', ru: 'Телефон (необязательно)', uk: 'Телефон (необовʼязково)' },
+    'acc.pwHint': { en: 'at least 8 characters', ru: 'минимум 8 символов', uk: 'щонайменше 8 символів' },
+    'acc.loginBtn': { en: 'Sign in', ru: 'Войти', uk: 'Увійти' },
+    'acc.regBtn': { en: 'Create account', ru: 'Создать аккаунт', uk: 'Створити акаунт' },
+    'acc.forgot': { en: 'Forgot your password? Call or text us at 224-253-3252 and we will restore access.', ru: 'Забыли пароль? Позвоните или напишите нам: 224-253-3252 — восстановим доступ.', uk: 'Забули пароль? Зателефонуйте або напишіть нам: 224-253-3252 — відновимо доступ.' },
+    'acc.hello': { en: 'Hello, {name}!', ru: 'Здравствуйте, {name}!', uk: 'Вітаємо, {name}!' },
+    'acc.my': { en: 'My courses', ru: 'Мои курсы', uk: 'Мої курси' },
+    'acc.none': { en: 'You have no courses yet.', ru: 'У вас пока нет курсов.', uk: 'У вас поки немає курсів.' },
+    'acc.browse': { en: 'Browse courses', ru: 'Смотреть курсы', uk: 'Переглянути курси' },
+    'acc.open': { en: 'Open course', ru: 'Открыть курс', uk: 'Відкрити курс' },
+    'acc.profile': { en: 'Profile', ru: 'Профиль', uk: 'Профіль' },
+    'acc.save': { en: 'Save', ru: 'Сохранить', uk: 'Зберегти' },
+    'acc.saved': { en: 'Saved', ru: 'Сохранено', uk: 'Збережено' },
+    'acc.changePw': { en: 'Change password', ru: 'Сменить пароль', uk: 'Змінити пароль' },
+    'acc.curPw': { en: 'Current password', ru: 'Текущий пароль', uk: 'Поточний пароль' },
+    'acc.newPw': { en: 'New password', ru: 'Новый пароль', uk: 'Новий пароль' },
+    'acc.logout': { en: 'Sign out', ru: 'Выйти', uk: 'Вийти' },
+    'acc.paidWait': { en: 'Checking your payment…', ru: 'Проверяем оплату…', uk: 'Перевіряємо оплату…' },
+    'acc.paidOk': { en: 'Payment received! The course is now in your account.', ru: 'Оплата прошла! Курс добавлен в ваш кабинет.', uk: 'Оплата пройшла! Курс додано до вашого кабінету.' },
+    'acc.paidErr': { en: 'We could not confirm the payment. If your card was charged, call us and we will open the course.', ru: 'Не удалось подтвердить оплату. Если деньги списались — позвоните нам, мы откроем доступ.', uk: 'Не вдалося підтвердити оплату. Якщо гроші списано — зателефонуйте нам, ми відкриємо доступ.' },
+
+    'err.bad_email': { en: 'Please enter a valid email.', ru: 'Проверьте email.', uk: 'Перевірте email.' },
+    'err.short_password': { en: 'The password must be at least 8 characters.', ru: 'Пароль — минимум 8 символов.', uk: 'Пароль — щонайменше 8 символів.' },
+    'err.no_name': { en: 'Please enter your name.', ru: 'Укажите имя.', uk: 'Вкажіть імʼя.' },
+    'err.email_taken': { en: 'This email is already registered. Sign in instead.', ru: 'Этот email уже зарегистрирован — войдите.', uk: 'Цей email уже зареєстровано — увійдіть.' },
+    'err.bad_login': { en: 'Wrong email or password.', ru: 'Неверный email или пароль.', uk: 'Невірний email або пароль.' },
+    'err.bad_password': { en: 'The current password is wrong.', ru: 'Текущий пароль неверный.', uk: 'Поточний пароль невірний.' },
+    'err.too_many': { en: 'Too many attempts. Try again in 15 minutes.', ru: 'Слишком много попыток. Попробуйте через 15 минут.', uk: 'Забагато спроб. Спробуйте за 15 хвилин.' },
+    'err.generic': { en: 'Something went wrong. Please try again.', ru: 'Что-то пошло не так. Попробуйте ещё раз.', uk: 'Щось пішло не так. Спробуйте ще раз.' },
   };
 
   const TITLES = {
@@ -198,7 +275,9 @@
 
   const apply = lang => {
     document.documentElement.lang = lang === 'uk' ? 'uk' : lang;
-    document.title = TITLES[lang];
+    // sub-pages name their title key: <html data-title="acd.title">
+    const tk = document.documentElement.dataset.title;
+    document.title = tk && T[tk] ? T[tk][lang] ?? T[tk].en : TITLES[lang];
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const entry = T[el.dataset.i18n];
       if (entry) el.innerHTML = entry[lang] ?? entry.en;

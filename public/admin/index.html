@@ -39,6 +39,8 @@
       <button data-view="leads" class="is-active"><span data-a="navLeads">Заявки</span> <i class="badge" id="newCount" hidden>0</i></button>
       <button data-view="texts" data-a="navTexts">Тексты сайта</button>
       <button data-view="gallery" data-a="navGallery">Галерея</button>
+      <button data-view="courses" data-a="navCourses">Курсы</button>
+      <button data-view="students" data-a="navStudents">Ученики</button>
       <button data-view="settings" data-a="navSettings">Настройки</button>
     </nav>
     <div class="side__foot">
@@ -92,6 +94,33 @@
       </header>
       <div class="gallery" id="gallery"></div>
       <p class="muted"><button class="link" id="galleryReset" data-a="galleryReset">Вернуть исходную галерею сайта</button></p>
+    </section>
+
+    <!-- COURSES -->
+    <section class="view" data-view="courses">
+      <header class="view__head">
+        <div><h2 data-a="navCourses">Курсы</h2><p data-a="coursesHint">Видеокурсы Академии: уроки, видео, цена. Черновик не виден на сайте, пока не отмечено «Опубликован».</p></div>
+        <div class="view__actions">
+          <button class="btn" id="courseSeed" data-a="courseSeed" hidden>Создать 3 курса Академии</button>
+          <button class="btn btn--primary" id="courseNew" data-a="courseNew">Новый курс</button>
+        </div>
+      </header>
+      <div class="courses" id="courseList"></div>
+      <div class="cedit" id="courseEdit" hidden></div>
+    </section>
+
+    <!-- STUDENTS -->
+    <section class="view" data-view="students">
+      <header class="view__head">
+        <div><h2 data-a="navStudents">Ученики</h2><p data-a="studentsHint">Аккаунты учеников. Здесь можно открыть курс вручную (например, оплата наличными) и задать новый пароль.</p></div>
+        <div class="view__actions">
+          <input class="search" id="studentSearch" type="search" data-a-ph="studentSearch">
+          <button class="btn btn--primary" id="studentNew" data-a="studentNew">Добавить ученика</button>
+        </div>
+      </header>
+      <div class="students" id="students"></div>
+      <h3 class="orders__h" data-a="orders">Оплаты</h3>
+      <div class="orders" id="orders"></div>
     </section>
 
     <!-- SETTINGS -->

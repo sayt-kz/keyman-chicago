@@ -12,7 +12,7 @@ const PUBLIC = path.join(ROOT, "public");
 const PORT = process.env.PORT || 3000;
 const TYPES = {
   ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".json": "application/json",
-  ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon",
+  ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon", ".mp4": "video/mp4",
 };
 
 async function runApi(req, res, pathname) {
@@ -28,7 +28,9 @@ async function serveStatic(req, res, pathname) {
   if (!file.startsWith(PUBLIC)) { res.writeHead(403); return res.end(); }
   try {
     if ((await stat(file)).isDirectory()) file = path.join(file, "index.html");
-  } catch { /* try below */ }
+  } catch {
+    if (!path.extname(file)) file += ".html"; // clean URLs, like Vercel: /account → account.html
+  }
   try {
     const data = await readFile(file);
     res.writeHead(200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
